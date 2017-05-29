@@ -6,7 +6,9 @@
   "scripts": {
     "db:make": "pg-bump create",
     "db:up": "pg-bump up",
-    "db:down": "pg-bump down"
+    "db:down": "pg-bump down",
+    "test": "mocha -r babel-register api/**/*.test.js",
+    "tdd": "npm t -- -w -R min"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,21 @@
   },
   "homepage": "https://github.com/thebearingedge/voting-app#readme",
   "dependencies": {
+    "bcrypt": "1.0.2",
+    "camelcase": "4.1.0",
+    "deep-clone": "3.0.2",
+    "knex": "0.13.0",
+    "snake-case": "2.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.2.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-register": "6.24.1",
+    "chai": "4.0.0",
+    "chai-struct": "3.0.0",
+    "eslint": "3.19.0",
+    "mocha": "3.4.2",
     "pg-bump": "0.0.1"
   }
 }
