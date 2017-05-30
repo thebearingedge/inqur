@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import camelSql from '../camel-sql'
+import { camelSql } from '../util'
 
 export default function usersData(knex) {
 

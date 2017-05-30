@@ -1,22 +1,19 @@
-import Knex from 'knex'
+import 'dotenv/config'
 import chai from 'chai'
 import { chaiStruct } from 'chai-struct'
+import sinonChai from 'sinon-chai'
 import { after } from 'mocha'
+import knex from './data'
 
 chai.use(chaiStruct)
-
-const knex = Knex({ client: 'pg', connection: { database: 'voting-app' } })
+chai.use(sinonChai)
 
 after(() => knex.destroy())
 
-const begin = setup => done => {
+export const begin = setup => done => {
   knex.transaction(trx => {
     setup(trx)
     done()
   })
   .catch(_ => _)
-}
-
-export {
-  begin
 }
