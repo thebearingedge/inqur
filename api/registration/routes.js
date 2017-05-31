@@ -1,6 +1,13 @@
 import { Router } from 'express'
+import joi from 'joi'
 import usersData from './users.data'
-import wrap from '../util/async-wrap'
+import { wrap, validate } from '../util'
+
+const newUser = joi.object().keys({
+  username: joi.string().trim().required(),
+  password: joi.string().trim().required(),
+  email: joi.string().trim().email().required()
+})
 
 export const register = users =>
   wrap(async ({ body }, res) => {
@@ -16,7 +23,7 @@ export default function routes(knex) {
 
   router
     .route('/')
-    .post(register(users))
+    .post(validate({ body: newUser }), register(users))
 
   return router
 }
