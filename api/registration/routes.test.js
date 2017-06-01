@@ -13,7 +13,7 @@ describe('registration/routes', () => {
     it('composes without error', () => {
       expect(() => router()).not.to.throw()
     })
-    
+
   })
 
   describe('register', () => {

@@ -15,7 +15,6 @@ export const register = users =>
     res.status(201).json(created)
   })
 
-
 export default function routes(knex) {
 
   const router = new Router()
