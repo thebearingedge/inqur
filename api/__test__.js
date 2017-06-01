@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import chai from 'chai'
+import chai, { expect } from 'chai'
 import { chaiStruct } from 'chai-struct'
 import sinonChai from 'sinon-chai'
 import { after } from 'mocha'
@@ -17,3 +17,5 @@ export const begin = setup => done => {
   })
   .catch(_ => _)
 }
+
+export { expect }

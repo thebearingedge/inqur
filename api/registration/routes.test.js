@@ -1,5 +1,5 @@
 import { describe, beforeEach, it } from 'mocha'
-import { expect } from 'chai'
+import { expect } from '../__test__'
 import { stub, spy } from 'sinon'
 import run from 'express-unit'
 import { fakeUser } from './__fixtures__'

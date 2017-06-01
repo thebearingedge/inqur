@@ -1,5 +1,5 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
-import { expect } from 'chai'
+import { expect } from '../__test__'
 import bcrypt from 'bcrypt'
 import { begin } from '../__test__'
 import { User, fakeUser } from './__fixtures__'

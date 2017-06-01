@@ -1,5 +1,5 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
+import { expect } from '../__test__'
 import run from 'express-unit'
 import wrap from './async-wrap'
 
