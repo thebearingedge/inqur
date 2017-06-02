@@ -14,14 +14,16 @@
     "tdd:api": "run-s -s 'test:api -- -w -R min'",
     "test:db": "mocha -r babel-register **/*.data.test.js",
     "tdd:db": "run-s -s 'test:db -- -w -R min'",
-    "build:server": "babel api/ -d build/ --ignore test,__",
+    "test:server": "mocha -r babel-register api/**/*.integration.js",
+    "tdd:server": "run-s -s 'test:server -- -w -R min'",
+    "build:server": "babel api/ -d build/ --ignore test,fixtures",
     "watch:server": "run-s -s 'build:server -- -w'",
-    "test": "run-s -s test:*",
-    "tdd": "run-p -s tdd:*",
-    "cover": "nyc run-p -s test:*",
+    "watch:start": "nodemon .",
+    "test": "run-p -s 'test:* -- -R mocha-silent-reporter'",
+    "cover": "nyc run-s -s test:api test:db test:server",
     "clean": "rimraf build/",
     "start": "node .",
-    "watch:start": "nodemon ."
+    "build": "run-s -s clean build:server"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,7 @@
   },
   "homepage": "https://github.com/thebearingedge/voting-app#readme",
   "dependencies": {
+    "axios": "0.16.1",
     "bcrypt": "1.0.2",
     "body-parser": "1.17.2",
     "camelcase": "4.1.0",
@@ -59,6 +62,7 @@
     "express-unit": "1.1.0",
     "faker": "4.1.0",
     "mocha": "3.4.2",
+    "mocha-silent-reporter": "1.0.0",
     "nodemon": "1.11.0",
     "npm-run-all": "4.0.2",
     "nyc": "11.0.1",

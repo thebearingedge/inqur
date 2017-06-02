@@ -1,10 +1,8 @@
 import 'dotenv/config'
-import express from 'express'
-import apiRouter from './router'
 import knex from './data'
+import createApp from './create-app'
 
-express()
-  .use('/api', apiRouter(knex))
+createApp(knex)
   .listen(process.env.PORT, () => {
     process.env.NODE_ENV === 'development' &&
     // eslint-disable-next-line
