@@ -3,7 +3,7 @@ import chai from 'chai'
 import { chaiStruct } from 'chai-struct'
 import axios from 'axios'
 import { begin } from '../__test__'
-import createApp from '../create-app'
+import { createApp } from '../server'
 
 chai.use(chaiStruct)
 

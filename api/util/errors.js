@@ -14,6 +14,18 @@ export class BadRequest extends ClientError {
   get statusCode() { return 400 }
 }
 
+export class ValidationError extends BadRequest {
+  constructor(errors) {
+    super()
+    this.errors = errors
+  }
+  toJSON() {
+    const json = super.toJSON()
+    const { errors } = this
+    return { ...json, errors }
+  }
+}
+
 export class InternalServerError extends CustomError {
   get error() { return 'Internal Server Error' }
   get statusCode() { return 500 }

@@ -18,6 +18,20 @@ describe('errors', () => {
     })
   })
 
+  describe('ValidationError', () => {
+    it('is a BadRequest error', () => {
+      const err = new errors.ValidationError()
+      expect(err).to.have.property('error', 'Bad Request')
+      expect(err).to.have.property('statusCode', 400)
+      expect(err.toJSON()).to.have.all.keys([
+        'error',
+        'statusCode',
+        'message',
+        'errors'
+      ])
+    })
+  })
+
   describe('InternalServerError', () => {
     it('has a 500 status', () => {
       const err = new errors.InternalServerError()

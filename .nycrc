@@ -11,6 +11,7 @@
     "api/**/*.js"
   ],
   "exclude": [
+    "**/test/**",
     "**/__test__.js",
     "**/__fixtures__.js",
     "**/*.test.js",

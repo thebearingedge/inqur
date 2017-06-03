@@ -20,7 +20,7 @@
     "watch:server": "run-s -s 'build:server -- -w'",
     "watch:start": "nodemon .",
     "test": "run-p -s 'test:* -- -R mocha-silent-reporter'",
-    "cover": "nyc run-s -s test:api test:db test:server",
+    "cover": "nyc npm t -s",
     "clean": "rimraf build/",
     "start": "node .",
     "build": "run-s -s clean build:server"
@@ -65,7 +65,7 @@
     "mocha-silent-reporter": "1.0.0",
     "nodemon": "1.11.0",
     "npm-run-all": "4.0.2",
-    "nyc": "11.0.1",
+    "nyc": "11.0.2",
     "onchange": "3.2.1",
     "pg-bump": "0.0.1",
     "rimraf": "2.6.1",

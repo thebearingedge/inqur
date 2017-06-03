@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import knex from './data'
-import createApp from './create-app'
+import { createApp } from './server'
 
 createApp(knex)
   .listen(process.env.PORT, () => {
