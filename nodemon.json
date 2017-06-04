@@ -1,9 +1,10 @@
 {
   "watch": [
-    "build/**/*.js"
+    "api/**/*.js"
   ],
   "ignore": [
-    "build/server/public/**/*.*",
+    "api/test",
+    "api/**/*.test.js",
     "node_modules/**/node_modules/"
   ],
   "env": {
