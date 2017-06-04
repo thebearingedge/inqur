@@ -9,7 +9,7 @@ chai.use(chaiStruct)
 
 export const start = setup => done => {
   begin(trx => {
-    const server = createApp(trx).listen(process.env.TEST_PORT, () => {
+    const server = createApp(trx).listen(process.env.API_TEST_PORT, () => {
       setup(trx, server)
     })
   })(done)
@@ -17,7 +17,7 @@ export const start = setup => done => {
 
 export const request = axios.create({
   headers: { 'Content-Type': 'application/json' },
-  baseURL: `http://localhost:${process.env.TEST_PORT}`,
+  baseURL: `http://localhost:${process.env.API_TEST_PORT}`,
   responseType: 'json',
   validateStatus: () => true
 })
