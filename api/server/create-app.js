@@ -1,4 +1,4 @@
-import express, { Router } from 'express'
+import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { errors } from '../util'
@@ -9,10 +9,7 @@ export default function createApp(knex) {
   return express()
     .disable('x-powered-by')
     .use(cors())
-    .use('/api',
-      new Router()
-        .use(bodyParser.json())
-        .use('/registration', registration(knex))
-        .use(errors.errorHandler())
-    )
+    .use(bodyParser.json())
+    .use('/registration', registration(knex))
+    .use(errors.errorHandler())
 }

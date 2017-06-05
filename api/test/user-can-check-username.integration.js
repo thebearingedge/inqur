@@ -5,7 +5,7 @@ import { fakeUser } from '../registration/__fixtures__'
 
 describe('User can check username', () => {
 
-  const endpoint = '/api/registration'
+  const endpoint = '/registration'
 
   let trx
   let server

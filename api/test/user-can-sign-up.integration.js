@@ -5,7 +5,7 @@ import { fakeUser, User } from '../registration/__fixtures__'
 
 describe('User can sign up', () => {
 
-  const endpoint = '/api/registration'
+  const endpoint = '/registration'
 
   let trx
   let server
