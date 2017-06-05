@@ -33,6 +33,9 @@ export class InternalServerError extends CustomError {
 
 // eslint-disable-next-line
 export const errorHandler = () => (err, req, res, next) => {
+  /* istanbul ignore next */
+  // eslint-disable-next-line
+  process.env.NODE_ENV === 'development' && console.error(err)
   const error = err instanceof ClientError
     ? err
     : new InternalServerError()
