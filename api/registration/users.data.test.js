@@ -17,18 +17,32 @@ describe('users.data', () => {
 
   afterEach(() => trx.rollback())
 
-  it('inserts a user with an encrypted password', async () => {
-    const user = fakeUser()
-    const created = await users.create(user)
-    expect(created).to.have.structure(User)
-    const { password: hash } = await trx
-      .select('password')
-      .from('users')
-      .where('username', user.username)
-      .first()
-    expect(hash).not.to.equal(user.password)
-    const match = await bcrypt.compare(user.password, hash)
-    expect(match).to.be.true
+  describe('create', () => {
+    it('inserts a user with an encrypted password', async () => {
+      const user = fakeUser()
+      const created = await users.create(user)
+      expect(created).to.have.structure(User)
+      const { password: hash } = await trx
+        .select('password')
+        .from('users')
+        .where('username', user.username)
+        .first()
+      expect(hash).not.to.equal(user.password)
+      const match = await bcrypt.compare(user.password, hash)
+      expect(match).to.be.true
+    })
+  })
+
+  describe('isAvailable', () => {
+    it('returns whether a username is available', async () => {
+      const user = fakeUser()
+      const [{ username }] = await trx
+        .insert(user)
+        .into('users')
+        .returning(['username'])
+      const isAvailable = await users.isAvailable({ username })
+      expect(isAvailable).to.be.false
+    })
   })
 
 })
