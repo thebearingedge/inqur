@@ -1,7 +1,7 @@
 import express, { Router } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import { errorHandler } from '../util'
+import { errors } from '../util'
 import registration from '../registration/routes'
 
 export default function createApp(knex) {
@@ -13,6 +13,6 @@ export default function createApp(knex) {
       new Router()
         .use(bodyParser.json())
         .use('/registration', registration(knex))
-        .use(errorHandler())
+        .use(errors.errorHandler())
     )
 }

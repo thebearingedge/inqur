@@ -44,4 +44,31 @@ describe('registration/routes', () => {
 
   })
 
+  describe('canRegister', () => {
+
+    let username
+    let users
+    let middleware
+
+    beforeEach(() => {
+      users = usersData()
+      middleware = routes.canRegister(users)
+      username = fakeUser().username
+    })
+
+    const setup = (req, res, next) => {
+      req.query = { username }
+      stub(users, 'isAvailable').resolves(true)
+      spy(res, 'json')
+      next()
+    }
+    
+    it('returns whether a username is available', async () => {
+      const [ err, , res ] = await run(setup, middleware)
+      expect(err).to.be.null
+      expect(res.json).to.have.been.calledWith({ username, isAvailable: true })
+    })
+
+  })
+
 })
