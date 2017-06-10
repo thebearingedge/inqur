@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "env": {
     "node": true,
@@ -8,5 +8,12 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2017
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/display-name": 0,
+    "react/prop-types": 0
   }
 }
