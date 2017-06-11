@@ -6,6 +6,8 @@ create table users (
   primary key (user_id),
   unique (username)
 );
+
+select add_timestamps('users');
 ---
 
 drop table users;

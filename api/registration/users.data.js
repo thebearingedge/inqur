@@ -11,7 +11,7 @@ export default function usersData(knex) {
     const [ created ] = await knex
       .insert({ username, email, password })
       .into('users')
-      .returning(['user_id', 'username', 'email'])
+      .returning(['user_id', 'username', 'email', 'created_at', 'updated_at'])
     return created
   }
 

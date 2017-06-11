@@ -1,6 +1,6 @@
 {
   "connection": {
-    "database": "voting-app"
+    "database": "inqur"
   },
   "files": "db/migrations"
 }

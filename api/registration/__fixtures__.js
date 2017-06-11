@@ -3,7 +3,9 @@ import faker from 'faker'
 export const User = {
   userId: String,
   username: String,
-  email: String
+  email: String,
+  createdAt: String,
+  updatedAt: String
 }
 
 export const fakeUser = () => ({
