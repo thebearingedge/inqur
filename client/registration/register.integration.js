@@ -2,6 +2,7 @@ import React from 'react'
 import { describe, beforeEach, afterEach, it } from 'mocha'
 import { expect } from 'chai'
 import { stub } from 'sinon'
+import Router from 'next/router'
 import { api } from '../core'
 import { Register } from './register'
 import { mount } from 'enzyme'
@@ -14,16 +15,17 @@ describe('registration', () => {
 
   beforeEach(() => {
     wrapper = mount(<Connected/>)
-  })
-
-  beforeEach(() => {
     stub(api, 'get')
     stub(api, 'post')
+    Router.router = true
+    stub(Router, 'push')
   })
 
   afterEach(() => {
     api.get.restore()
     api.post.restore()
+    Router.router = null
+    Router.push.restore()
   })
 
   it('checks for the availability of a username', done => {
@@ -62,7 +64,7 @@ describe('registration', () => {
     expect(retypePassword.parent()).not.to.have.text('Passwords must match.')
   })
 
-  it('registers a user', done => {
+  it('registers a user and changes routes', done => {
     api.get
       .withArgs('/registration', { params: { username: 'foo' } })
       .resolves({ data: { username: 'foo', isAvailable: true } })
@@ -73,10 +75,10 @@ describe('registration', () => {
         password: 'foo',
         retypePassword: 'foo'
       })
-      .callsFake(() => {
-        done()
-        return { data: { username: 'foo' } }
-      })
+      .resolves({ data: { username: 'foo' } })
+    Router.push
+      .withArgs('/')
+      .callsFake(() => done())
     wrapper
       .find('[name="username"]')
       .first()

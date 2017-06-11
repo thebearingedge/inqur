@@ -12,3 +12,8 @@ export const onSubmit = user =>
     const { data } = await api.post('/registration', user)
     return data
   }
+
+export const onSubmitSuccess = () =>
+  (dispatch, getState, { Router }) => {
+    Router.push('/')
+  }

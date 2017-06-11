@@ -8,7 +8,7 @@ import { reduxForm, Field } from 'redux-form'
 
 import { initStore } from '../core'
 import { Input, Button, Link } from '../components'
-import { onSubmit, asyncValidate } from './actions'
+import { onSubmit, onSubmitSuccess, asyncValidate } from './actions'
 import { validate, shouldAsyncValidate } from './helpers'
 
 const Signup = styled.div`
@@ -105,6 +105,7 @@ class Page extends Component {
 const mapDispatch = dispatch => bindActionCreators({
   onSubmit,
   asyncValidate,
+  onSubmitSuccess
 }, dispatch)
 
 export const Register = connect(null, mapDispatch)(reduxForm({
