@@ -27,14 +27,20 @@ export default class extends Document {
     return (
       <html>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <meta name='viewport' content='width=device-width, initial-scale=1'/>
+          <link rel='apple-touch-icon' sizes='180x180' href='/images/apple-touch-icon.png'/>
+          <link rel='icon' type='image/png' sizes='32x32' href='/images/favicon-32x32.png'/>
+          <link rel='icon' type='image/png' sizes='16x16' href='/images/favicon-16x16.png'/>
+          <link rel='manifest' href='/manifest.json'/>
+          <link rel='mask-icon' href='/images/safari-pinned-tab.svg' color='#2c2f34'/>
+          <meta name='theme-color' content='#2c2f34'/>
           <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css'/>
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i'/>
           { styleTags }
           <title>Inqur</title>
         </Head>
         <body>
-          <div className="root">{ main }</div>
+          <div className='root'>{ main }</div>
           <NextScript />
         </body>
       </html>
