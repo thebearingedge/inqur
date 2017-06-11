@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["standard", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "env": {
     "node": true,
@@ -13,7 +13,12 @@
     "react"
   ],
   "rules": {
-    "react/display-name": 0,
+    "padded-blocks": 0,
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
     "react/prop-types": 0
   }
 }

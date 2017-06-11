@@ -30,16 +30,16 @@ describe('registration/routes', () => {
       const user = fakeUser()
       const setup = (req, res, next) => {
         req.body = user
-        stub(users, 'create')
+        stub(users, 'create').resolves(user)
         spy(res, 'status')
         spy(res, 'json')
         next()
       }
       const [ err, , res ] = await run(setup, middleware)
-      expect(err).to.be.null
+      expect(err).to.equal(null)
       expect(users.create).to.have.been.calledWith(user)
       expect(res.status).to.have.been.calledWith(201)
-      expect(res.json).to.have.been.called
+      expect(res.json).to.have.been.calledWith(user)
     })
 
   })
@@ -62,10 +62,10 @@ describe('registration/routes', () => {
       spy(res, 'json')
       next()
     }
-    
+
     it('returns whether a username is available', async () => {
       const [ err, , res ] = await run(setup, middleware)
-      expect(err).to.be.null
+      expect(err).to.equal(null)
       expect(res.json).to.have.been.calledWith({ username, isAvailable: true })
     })
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
 import styled from 'styled-components'
+import Link from 'next/link'
 
-const Anchor = styled.a`
+const A = styled.a`
   display: inline-block;
   padding: 10px 25px;
   font-size: 0.875em;
@@ -10,12 +10,18 @@ const Anchor = styled.a`
   cursor: pointer;
   opacity: 0.9;
 
+  &:visited {
+    color: inherit;
+  }
+
   &:hover {
     opacity: 1;
   }
 `
 
-export default ({ children, ...props }) =>
-  <Link {...props}>
-    <Anchor >{ children }</Anchor>
+const Anchor = ({ children, ...props }) =>
+  <Link>
+    <A { ...props }>{ children }</A>
   </Link>
+
+export default Anchor

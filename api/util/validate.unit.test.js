@@ -45,7 +45,7 @@ describe('validate', () => {
     }
     it('strips unknown properties', done => {
       run(setup, middleware, (err, req) => {
-        expect(err).to.be.null
+        expect(err).to.equal(null)
         expect(req.body)
           .to.have.property('username')
           .and.not.to.have.property('dateOfBirth')

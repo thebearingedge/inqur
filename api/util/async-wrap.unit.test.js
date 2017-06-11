@@ -12,7 +12,7 @@ describe('asyncWrap', () => {
       const wrapped = wrap(middleware)
       expect(wrapped).to.have.a.lengthOf(3)
       const [ err ] = await run(null, wrapped)
-      expect(err).to.be.null
+      expect(err).to.equal(null)
     })
   })
 
@@ -23,7 +23,7 @@ describe('asyncWrap', () => {
       const wrapped = wrap(middleware)
       expect(wrapped).to.have.a.lengthOf(4)
       const [ err ] = await run(null, wrapped)
-      expect(err).to.be.null
+      expect(err).to.equal(null)
     })
   })
 

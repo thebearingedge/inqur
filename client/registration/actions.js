@@ -3,7 +3,8 @@ export const asyncValidate = ({ username }) =>
     if (!username) return
     const { data } = await api.get('/registration', { params: { username } })
     if (!data.isAvailable) {
-      return Promise.reject({ username: `Sorry, that username is taken.` })
+      const err = { ...new Error(), username: 'Sorry, that username is taken.' }
+      return Promise.reject(err)
     }
   }
 

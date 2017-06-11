@@ -55,7 +55,7 @@ describe('errors', () => {
       }
       it('sends the client error', done => {
         run(setup, errors.errorHandler(), (_err, req, res) => {
-          expect(_err).to.be.null
+          expect(_err).to.equal(null)
           expect(res.json).to.have.been.calledWith(error)
           done()
         })
@@ -71,7 +71,7 @@ describe('errors', () => {
       }
       it('sends the client error', done => {
         run(setup, errors.errorHandler(), (_err, req, res) => {
-          expect(_err).to.be.null
+          expect(_err).to.equal(null)
           expect(res.status).to.have.been.calledWith(500)
           const [ sent ] = res.json.getCall(0).args
           expect(sent).to.have.property('error', 'Internal Server Error')

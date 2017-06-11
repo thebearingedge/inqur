@@ -1,7 +1,6 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
-import { expect } from '../__test__'
 import bcrypt from 'bcrypt'
-import { begin } from '../__test__'
+import { begin, expect } from '../__test__'
 import { User, fakeUser } from './__fixtures__'
 import usersData from './users.data'
 
@@ -29,7 +28,7 @@ describe('users.data', () => {
         .first()
       expect(hash).not.to.equal(user.password)
       const match = await bcrypt.compare(user.password, hash)
-      expect(match).to.be.true
+      expect(match).to.equal(true)
     })
   })
 
@@ -41,7 +40,7 @@ describe('users.data', () => {
         .into('users')
         .returning(['username'])
       const isAvailable = await users.isAvailable({ username })
-      expect(isAvailable).to.be.false
+      expect(isAvailable).to.equal(false)
     })
   })
 

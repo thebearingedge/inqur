@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Input = styled.div`
+const Wrapper = styled.div`
   display: inline-block;
   position: relative;
 
@@ -24,7 +24,7 @@ const Input = styled.div`
 
   & input:focus {
     border: 1px solid #1bb76e;
-    border-right: ${({ hasError }) => hasError && '8px solid #d43030' };
+    border-right: ${({ hasError }) => hasError && '8px solid #d43030'};
   }
 
   & input::placeholder {
@@ -58,15 +58,17 @@ const Pointer = styled.span`
   transform: rotate(-90deg);
 `
 
-export default ({ input, meta, ...rest }) => {
+const Input = ({ input, meta, ...rest }) => {
   const { dirty, touched, error } = meta
   const hasError = (dirty && error) || (touched && error)
   return (
-    <Input hasError={ hasError }>
+    <Wrapper hasError={ hasError }>
       <input { ...input } { ...{ ...rest } }/>
       { hasError &&
         <Message><Pointer/>{ error }</Message>
       }
-    </Input>
+    </Wrapper>
   )
 }
+
+export default Input

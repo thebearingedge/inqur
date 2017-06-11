@@ -48,7 +48,7 @@ describe('registration/actions', () => {
           })
         })
         const result = await store.dispatch(asyncValidate({ username: 'foo' }))
-        expect(result).to.be.undefined
+        expect(result).to.equal(undefined)
       })
 
     })
@@ -57,7 +57,7 @@ describe('registration/actions', () => {
 
       it('resolves without sending a request', async () => {
         const result = await store.dispatch(asyncValidate({}))
-        expect(result).to.be.undefined
+        expect(result).to.equal(undefined)
       })
 
     })

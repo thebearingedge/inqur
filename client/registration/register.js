@@ -1,11 +1,11 @@
 import debounce from 'debounce'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { reduxForm, Field } from 'redux-form'
 
-import { Input, Button, Link } from '../components'
+import { Input, Button, Anchor } from '../components'
 import { onSubmit, onSubmitSuccess, asyncValidate } from './actions'
 import { validate, shouldAsyncValidate } from './helpers'
 
@@ -36,10 +36,10 @@ const FadeBreak = styled.span`
   display: inline-block;
   width: 129px;
   height: 3px;
-  margin: ${({ flipped }) => flipped ? '0 0 0 2px' : '0 3px 0 7px' };
+  margin: ${({ flipped }) => flipped ? '0 0 0 2px' : '0 3px 0 7px'};
   opacity: 0.7;
   background: url('/images/fading-section-break.png') no-repeat;
-  transform: ${({ flipped }) => !flipped || 'rotate(180deg) translate(0,2px);' }
+  transform: ${({ flipped }) => !flipped || 'rotate(180deg) translate(0,2px);'}
 `
 
 const Inputs = styled.div`
@@ -98,7 +98,7 @@ class Page extends Component {
               component={ Input }/>
           </Inputs>
           <Controls>
-            <Link href='#'>sign in</Link>
+            <Anchor href='#'>sign in</Anchor>
             <Button type='submit' disabled={ submitting }>Register</Button>
           </Controls>
         </form>

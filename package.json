@@ -26,7 +26,8 @@
     "tdd:client:int": "run-s -s 'test:client:int -- -w -R min'",
     "dev": "run-p -s watch:*",
     "test": "run-p -s 'test:** -- -R mocha-silent-reporter'",
-    "cover": "nyc npm t -s"
+    "cover": "nyc npm t -s",
+    "lint": "eslint api/ client/"
   },
   "repository": {
     "type": "git",
@@ -79,7 +80,12 @@
     "chai-struct": "3.0.0",
     "enzyme": "2.8.2",
     "eslint": "3.19.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-node": "5.0.0",
+    "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-react": "7.0.1",
+    "eslint-plugin-standard": "3.0.1",
     "express-unit": "1.1.0",
     "faker": "4.1.0",
     "jsdom": "11.0.0",
