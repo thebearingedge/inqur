@@ -2,7 +2,7 @@ import { describe, beforeEach, afterEach, it } from 'mocha'
 import { api } from '../core'
 import moxios from 'moxios'
 import { mockStore, expect, rejected } from '../test/unit'
-import { asyncValidate } from './actions'
+import { asyncValidate, onSubmit } from './actions'
 
 describe('registration/actions', () => {
 
@@ -68,6 +68,32 @@ describe('registration/actions', () => {
 
     })
 
+  })
+
+  describe('onSubmit', () => {
+
+    const username = 'foo'
+    let store
+
+    beforeEach(() => {
+      store = mockStore()
+      moxios.install(api)
+    })
+
+    afterEach(() => {
+      moxios.uninstall(api)
+    })
+
+    it('posts a new user', async () => {
+      moxios.wait(async () => {
+        const req = moxios.requests.mostRecent()
+        const { data, method } = req.config
+        expect(method).to.equal('post')
+        expect(JSON.parse(data)).to.deep.equal({ username })
+        req.respondWith({ status: 201, response: { username } })
+      })
+      await store.dispatch(onSubmit({ username }))
+    })
   })
 
 })

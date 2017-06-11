@@ -6,3 +6,9 @@ export const asyncValidate = ({ username }) =>
       return Promise.reject({ username: `Sorry, that username is taken.` })
     }
   }
+
+export const onSubmit = user =>
+  async (dispatch, getState, { api }) => {
+    const { data } = await api.post('/registration', user)
+    return data
+  }
