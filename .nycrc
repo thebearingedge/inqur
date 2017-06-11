@@ -17,7 +17,8 @@
     "**/__fixtures__.js",
     "**/*.test.js",
     "**/*.config.js",
-    "**/index.js"
+    "**/index.js",
+    "client/**/*.integration.js"
   ],
   "all": true
 }

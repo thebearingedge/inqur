@@ -1,5 +1,6 @@
 require('dotenv/config')
 const next = require('next')
+const { join } = require('path')
 const { parse } = require('url')
 const express = require('express')
 
@@ -11,6 +12,7 @@ app
   .prepare()
   .then(() => {
     express()
+      .use(express.static(join(__dirname, 'static')))
       .use((req, res) => handle(req, res, parse(req.url)))
       .listen(process.env.CLIENT_PORT, () => {
         // eslint-disable-next-line
