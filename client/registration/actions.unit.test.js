@@ -8,7 +8,6 @@ describe('registration/actions', () => {
 
   describe('asyncValidate', () => {
 
-    const username = 'foo'
     let store
 
     beforeEach(() => {
@@ -23,16 +22,14 @@ describe('registration/actions', () => {
     describe('when a username is not available', () => {
 
       it('rejects with a validation error', async () => {
-        moxios.stubOnce('GET', '/registration', { username })
         moxios.wait(() => {
-          moxios.requests
-            .mostRecent()
-            .respondWith({
-              status: 200,
-              response: { username, isAvailable: false }
-            })
+          const req = moxios.requests.get('GET', '/registration?username=foo')
+          req.respondWith({
+            status: 200,
+            response: { username: 'foo', isAvailable: false }
+          })
         })
-        const err = await rejected(store.dispatch(asyncValidate({ username })))
+        const err = await rejected(store.dispatch(asyncValidate({ username: 'foo' })))
         expect(err).to.deep.equal({
           username: 'Sorry, that username is taken.'
         })
@@ -43,16 +40,14 @@ describe('registration/actions', () => {
     describe('when a username is available', () => {
 
       it('resolves', async () => {
-        moxios.stubOnce('GET', '/registration', { username })
         moxios.wait(() => {
-          moxios.requests
-            .mostRecent()
-            .respondWith({
-              status: 200,
-              response: { username, isAvailable: true }
-            })
+          const req = moxios.requests.get('GET', '/registration?username=foo')
+          req.respondWith({
+            status: 200,
+            response: { username: 'foo', isAvailable: true }
+          })
         })
-        const result = await store.dispatch(asyncValidate({ username }))
+        const result = await store.dispatch(asyncValidate({ username: 'foo' }))
         expect(result).to.be.undefined
       })
 
@@ -61,7 +56,6 @@ describe('registration/actions', () => {
     describe('when no username is passed', () => {
 
       it('resolves without sending a request', async () => {
-        moxios.stubOnce('GET', '/registration', { username })
         const result = await store.dispatch(asyncValidate({}))
         expect(result).to.be.undefined
       })
@@ -72,7 +66,6 @@ describe('registration/actions', () => {
 
   describe('onSubmit', () => {
 
-    const username = 'foo'
     let store
 
     beforeEach(() => {
@@ -86,13 +79,12 @@ describe('registration/actions', () => {
 
     it('posts a new user', async () => {
       moxios.wait(async () => {
-        const req = moxios.requests.mostRecent()
-        const { data, method } = req.config
-        expect(method).to.equal('post')
-        expect(JSON.parse(data)).to.deep.equal({ username })
-        req.respondWith({ status: 201, response: { username } })
+        const req = moxios.requests.get('POST', '/registration')
+        expect(JSON.parse(req.config.data)).to.deep.equal({ username: 'foo' })
+        req.respondWith({ status: 201, response: { username: 'foo' } })
       })
-      await store.dispatch(onSubmit({ username }))
+      const user = await store.dispatch(onSubmit({ username: 'foo' }))
+      expect(user).to.deep.equal({ username: 'foo' })
     })
   })
 
