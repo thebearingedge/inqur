@@ -11,6 +11,12 @@ import { Input, Button, Link } from '../components'
 import { onSubmit, onSubmitSuccess, asyncValidate } from './actions'
 import { validate, shouldAsyncValidate } from './helpers'
 
+const Logo = styled.img`
+  display: block;
+  margin: 0 auto 90px;
+  width: 188px;
+`
+
 const Signup = styled.div`
   padding-top: 80px;
   width: 350px;
@@ -66,6 +72,7 @@ class Page extends Component {
       <Signup>
         <form noValidate onSubmit={ handleSubmit }>
           <Title>
+            <Logo src='/images/inqur.svg'/>
             <FadeBreak/> Sign up <FadeBreak flipped/>
           </Title>
           <Inputs>
