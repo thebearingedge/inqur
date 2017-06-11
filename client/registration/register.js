@@ -3,10 +3,8 @@ import styled from 'styled-components'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import withRedux from 'next-redux-wrapper'
 import { reduxForm, Field } from 'redux-form'
 
-import { initStore } from '../core'
 import { Input, Button, Link } from '../components'
 import { onSubmit, onSubmitSuccess, asyncValidate } from './actions'
 import { validate, shouldAsyncValidate } from './helpers'
@@ -109,7 +107,7 @@ class Page extends Component {
   }
 }
 
-const mapDispatch = dispatch => bindActionCreators({
+export const mapDispatch = dispatch => bindActionCreators({
   onSubmit,
   asyncValidate,
   onSubmitSuccess
@@ -121,5 +119,3 @@ export const Register = connect(null, mapDispatch)(reduxForm({
   touchOnBlur: false,
   shouldAsyncValidate
 })(Page))
-
-export default withRedux(initStore, null, mapDispatch)(Register)
