@@ -2,6 +2,7 @@ import React from 'react'
 import { describe, beforeEach, afterEach, it } from 'mocha'
 import { expect } from 'chai'
 import { stub } from 'sinon'
+import moxios from 'moxios'
 import Router from 'next/router'
 import { api } from '../core'
 import { Register } from './register'
@@ -15,30 +16,24 @@ describe('registration', () => {
 
   beforeEach(() => {
     wrapper = mount(<Connected/>)
-    stub(api, 'get')
-    stub(api, 'post')
-    Router.router = true
+    moxios.install(api)
     stub(Router, 'push')
   })
 
   afterEach(() => {
-    api.get.restore()
-    api.post.restore()
-    Router.router = null
+    moxios.uninstall(api)
     Router.push.restore()
   })
 
-  it('checks for the availability of a username', done => {
-    api.get
-      .withArgs('/registration', { params: { username: 'foo' } })
-      .callsFake(() => {
-        done()
-        return { data: { username: 'foo', isAvailable: true } }
-      })
+  it('checks for the availability of a username', async () => {
     wrapper
-      .find('input')
+      .find('[name="username"]')
       .first()
       .simulate('change', { target: { value: 'foo' } })
+    await moxios.stubOnce('GET', '/registration?username=foo', {
+      status: 200,
+      response: { username: 'foo', isAvailable: true }
+    })
   })
 
   it('requires a valid email', () => {
@@ -65,20 +60,17 @@ describe('registration', () => {
   })
 
   it('registers a user and changes routes', done => {
-    api.get
-      .withArgs('/registration', { params: { username: 'foo' } })
-      .resolves({ data: { username: 'foo', isAvailable: true } })
-    api.post
-      .withArgs('/registration', {
-        username: 'foo',
-        email: 'foo@bar.baz',
-        password: 'foo',
-        retypePassword: 'foo'
-      })
-      .resolves({ data: { username: 'foo' } })
     Router.push
       .withArgs('/')
       .callsFake(() => done())
+    moxios.stubRequest('/registration?username=foo', {
+      status: 200,
+      response: { username: 'foo', isAvailable: true }
+    })
+    moxios.stubOnce('POST', '/registration', {
+      status: 201,
+      response: { username: 'foo' }
+    })
     wrapper
       .find('[name="username"]')
       .first()
@@ -95,7 +87,7 @@ describe('registration', () => {
       .find('[name="retypePassword"]')
       .first()
       .simulate('change', { target: { value: 'foo' } })
-    wrapper.find('button').simulate('submit')
+    wrapper.find('[type="submit"]').simulate('submit')
   })
 
 })
