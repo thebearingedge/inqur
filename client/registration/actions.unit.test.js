@@ -1,37 +1,33 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
+import { stub } from 'sinon'
 import { api } from '../core'
-import moxios from 'moxios'
-import { mockStore, expect, rejected } from '../test/unit'
+import { injectStore, expect, rejected } from '../test/unit'
 import { asyncValidate, onSubmit } from './actions'
 
 describe('registration/actions', () => {
 
+  let store
+
+  beforeEach(() => {
+    store = injectStore({ api })()
+  })
+
   describe('asyncValidate', () => {
 
-    let store
+    beforeEach(() => stub(api, 'get'))
 
-    beforeEach(() => {
-      store = mockStore()
-      moxios.install(api)
-    })
-
-    afterEach(() => {
-      moxios.uninstall(api)
-    })
+    afterEach(() => api.get.restore())
 
     describe('when a username is not available', () => {
 
       it('rejects with a validation error', async () => {
-        moxios.wait(() => {
-          const req = moxios.requests.get('GET', '/registration?username=foo')
-          req.respondWith({
-            status: 200,
-            response: { username: 'foo', isAvailable: false }
-          })
-        })
+        api.get.resolves({ data: { username: 'foo', isAvailable: false } })
         const err = await rejected(store.dispatch(asyncValidate({ username: 'foo' })))
-        expect(err).to.deep.equal({
+        expect(err).to.include({
           username: 'Sorry, that username is taken.'
+        })
+        expect(api.get).to.have.been.calledWith('/registration', {
+          params: { username: 'foo' }
         })
       })
 
@@ -40,15 +36,12 @@ describe('registration/actions', () => {
     describe('when a username is available', () => {
 
       it('resolves', async () => {
-        moxios.wait(() => {
-          const req = moxios.requests.get('GET', '/registration?username=foo')
-          req.respondWith({
-            status: 200,
-            response: { username: 'foo', isAvailable: true }
-          })
-        })
+        api.get.resolves({ data: { username: 'foo', isAvailable: true } })
         const result = await store.dispatch(asyncValidate({ username: 'foo' }))
         expect(result).to.equal(undefined)
+        expect(api.get).to.have.been.calledWith('/registration', {
+          params: { username: 'foo' }
+        })
       })
 
     })
@@ -66,26 +59,19 @@ describe('registration/actions', () => {
 
   describe('onSubmit', () => {
 
-    let store
+    beforeEach(() => stub(api, 'post'))
 
-    beforeEach(() => {
-      store = mockStore()
-      moxios.install(api)
-    })
-
-    afterEach(() => {
-      moxios.uninstall(api)
-    })
+    afterEach(() => api.post.restore())
 
     it('posts a new user', async () => {
-      moxios.wait(async () => {
-        const req = moxios.requests.get('POST', '/registration')
-        expect(JSON.parse(req.config.data)).to.deep.equal({ username: 'foo' })
-        req.respondWith({ status: 201, response: { username: 'foo' } })
-      })
+      api.post.resolves({ data: { username: 'foo' } })
       const user = await store.dispatch(onSubmit({ username: 'foo' }))
       expect(user).to.deep.equal({ username: 'foo' })
+      expect(api.post).to.have.been.calledWith('/registration', {
+        username: 'foo'
+      })
     })
+
   })
 
 })
