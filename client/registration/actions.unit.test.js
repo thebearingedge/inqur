@@ -1,7 +1,6 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
-import { stub } from 'sinon'
+import { injectStore, expect, stub, rejected } from '../test/unit'
 import { api } from '../core'
-import { injectStore, expect, rejected } from '../test/unit'
 import { asyncValidate, onSubmit } from './actions'
 
 describe('registration/actions', () => {

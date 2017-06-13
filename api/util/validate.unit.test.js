@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha'
 import joi from 'joi'
-import { expect } from '../__test__'
+import { expect } from '../test/unit'
 import run from 'express-unit'
 import { ValidationError } from './errors'
 import validate from './validate'

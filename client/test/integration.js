@@ -1,13 +1,13 @@
 import { beforeEach, afterEach } from 'mocha'
 import { JSDOM } from 'jsdom'
+import { mount } from 'enzyme'
 import chai from 'chai'
-import sinonChai from 'sinon-chai'
 import chaiEnzyme from 'chai-enzyme'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { initStore } from '../core'
+export * from './shared'
 
-chai.use(sinonChai)
 chai.use(chaiEnzyme())
 
 beforeEach(() => {
@@ -29,3 +29,5 @@ export const withStore = Component =>
       </Provider>
     )
   }
+
+export { mount }

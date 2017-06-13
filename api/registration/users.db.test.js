@@ -1,10 +1,10 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
 import bcrypt from 'bcrypt'
-import { begin, expect } from '../__test__'
-import { User, fakeUser } from './__fixtures__'
-import usersData from './users.data'
+import { begin, expect } from '../test/db'
+import { User, fakeUser } from '../test/fixtures'
+import usersData from './users-data'
 
-describe('users.data', () => {
+describe('usersData', () => {
 
   let trx
   let users

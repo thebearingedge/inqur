@@ -1,5 +1,5 @@
 import { describe, it } from 'mocha'
-import { expect } from '../__test__'
+import { expect } from '../test/unit'
 import { spy } from 'sinon'
 import run from 'express-unit'
 import * as errors from './errors'

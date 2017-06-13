@@ -1,9 +1,8 @@
 import { describe, beforeEach, it } from 'mocha'
-import { expect } from '../__test__'
-import { stub, spy } from 'sinon'
 import run from 'express-unit'
-import { fakeUser } from './__fixtures__'
-import usersData from './users.data'
+import { fakeUser } from '../test/fixtures'
+import { expect, stub, spy } from '../test/unit'
+import usersData from './users-data'
 import router, * as routes from './routes'
 
 describe('registration/routes', () => {

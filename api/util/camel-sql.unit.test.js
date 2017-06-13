@@ -1,5 +1,5 @@
 import { describe, it } from 'mocha'
-import { expect } from '../__test__'
+import { expect } from '../test/unit'
 import { spy } from 'sinon'
 import camelSql from './camel-sql'
 

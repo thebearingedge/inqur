@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import joi from 'joi'
-import usersData from './users.data'
+import usersData from './users-data'
 import { wrap, validate } from '../util'
 
 const newUser = joi.object().keys({

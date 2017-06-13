@@ -1,13 +1,10 @@
-import React from 'react'
 import { describe, beforeEach, afterEach, it } from 'mocha'
-import { expect } from 'chai'
-import { stub } from 'sinon'
+import React from 'react'
 import moxios from 'moxios'
 import Router from 'next/router'
+import { withStore, expect, mount, stub } from '../test/integration'
 import { api } from '../core'
 import { Register } from './register'
-import { mount } from 'enzyme'
-import { withStore } from '../test/integration'
 
 describe('registration', () => {
 
