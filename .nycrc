@@ -12,13 +12,12 @@
     "client/**/*.js"
   ],
   "exclude": [
-    "**/test/**",
     "**/__test__.js",
     "**/__fixtures__.js",
     "**/*.test.js",
     "**/*.config.js",
     "**/index.js",
-    "client/**/*.integration.js"
+    "**/test/"
   ],
   "all": true
 }
