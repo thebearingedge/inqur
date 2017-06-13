@@ -27,7 +27,8 @@
     "cover": "nyc npm t -s",
     "lint": "eslint api/ client/",
     "build:client": "NODE_ENV=production next build client/",
-    "start:client": "NODE_ENV=production node client/"
+    "start:client": "NODE_ENV=production node client/",
+    "precommit": "run-p -s lint test"
   },
   "repository": {
     "type": "git",
@@ -89,6 +90,7 @@
     "eslint-plugin-standard": "3.0.1",
     "express-unit": "1.1.0",
     "faker": "4.1.0",
+    "husky": "0.13.4",
     "jsdom": "11.0.0",
     "mocha": "3.4.2",
     "mocha-silent-reporter": "1.0.0",
