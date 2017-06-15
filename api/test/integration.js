@@ -4,14 +4,14 @@ import { chaiStruct } from 'chai-struct'
 import axios from 'axios'
 import qs from 'qs'
 import { begin } from './db'
-import { createApp } from '../server'
+import createApi from '../create-api'
 export * from './shared'
 
 chai.use(chaiStruct)
 
 export const start = setup => done => {
   begin(trx => {
-    const server = createApp(trx).listen(process.env.API_TEST_PORT, () => {
+    const server = createApi(trx).listen(process.env.API_TEST_PORT, () => {
       setup(trx, server)
     })
   })(done)
