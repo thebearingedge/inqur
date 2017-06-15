@@ -4,8 +4,6 @@
   ],
   "ignore": [
     "test/",
-    "__test__.js",
-    "__fixtures__.js",
     "*.test.js",
     "node_modules/**/node_modules/"
   ],
