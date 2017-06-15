@@ -17,4 +17,4 @@ before_script:
   - export PGDATABASE=inqur
   - npm run db:up
 script:
-  - npm test
+  - npm run cover
