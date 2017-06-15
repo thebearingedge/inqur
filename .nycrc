@@ -1,8 +1,4 @@
 {
-  "lines": 100,
-  "statements": 100,
-  "functions": 100,
-  "branches": 100,
   "reporter": [
     "lcov",
     "text-summary"
@@ -12,12 +8,12 @@
     "client/**/*.js"
   ],
   "exclude": [
-    "**/__test__.js",
-    "**/__fixtures__.js",
+    "**/test/**",
+    "**/.next/**",
+    "**/index.js",
     "**/*.test.js",
     "**/*.config.js",
-    "**/index.js",
-    "**/test/"
+    "**/_document.js"
   ],
   "all": true
 }

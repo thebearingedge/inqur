@@ -27,7 +27,7 @@
     "e2e:build": "run-s -s db:cycle && next build client/",
     "e2e:test": "mocha -t 0 -r babel-register e2e/*.test.js",
     "e2e": "run-s -s e2e:build e2e:test",
-    "cover": "nyc npm t -s",
+    "cover": "nyc run-s -s test e2e",
     "lint": "eslint api/ client/ e2e/",
     "build:client": "NODE_ENV=production next build client/",
     "start:client": "NODE_ENV=production node client/",
