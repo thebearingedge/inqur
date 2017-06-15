@@ -31,7 +31,7 @@
     "lint": "eslint api/ client/ e2e/",
     "build:client": "NODE_ENV=production next build client/",
     "start:client": "NODE_ENV=production node client/",
-    "precommit": "run-p -s lint test"
+    "precommit": "run-p -s lint"
   },
   "repository": {
     "type": "git",
