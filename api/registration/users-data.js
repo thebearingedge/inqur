@@ -16,11 +16,14 @@ export default function usersData(knex) {
   }
 
   async function isAvailable({ username }) {
-    const { exists } = await knex
-      .select(knex.raw('count(username)::int::boolean as exists'))
-      .from('users')
-      .where({ username })
-      .first()
+    const { rows: [{ exists }] } = await knex
+      .raw(`select exists(
+        ${knex
+          .select('*')
+          .from('users')
+          .where({ username })
+          .first()}
+      )`)
     return !exists
   }
 
