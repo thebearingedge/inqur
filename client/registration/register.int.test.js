@@ -8,7 +8,8 @@ import { Register } from './register'
 
 describe('registration', () => {
 
-  const Connected = withStore(Register)
+  const connect = withStore({ api, Router })
+  const Connected = connect(Register)()
   let wrapper
 
   beforeEach(() => {

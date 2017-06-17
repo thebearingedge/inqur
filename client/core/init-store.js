@@ -6,8 +6,8 @@ import reducer from './reducer'
 
 const { devToolsExtension = () => _ => _ } = global
 
-export default state =>
+export default (env = { api, Router }) => state =>
   createStore(reducer, state, compose(
-    applyMiddleware(thunk.withExtraArgument({ api, Router })),
+    applyMiddleware(thunk.withExtraArgument(env)),
     devToolsExtension()
   ))
