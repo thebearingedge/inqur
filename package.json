@@ -106,7 +106,6 @@
     "pg-bump": "0.0.1",
     "react-test-renderer": "15.5.4",
     "redux-mock-store": "1.2.3",
-    "rimraf": "2.6.1",
     "sinon": "2.3.4",
     "sinon-chai": "2.10.0",
     "webpack": "2.6.1"
