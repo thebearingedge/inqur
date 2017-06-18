@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import chai from 'chai'
 import { chaiStruct } from 'chai-struct'
 import axios from 'axios'
