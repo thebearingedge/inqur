@@ -6,6 +6,8 @@ import { begin } from './db'
 import createApi from '../create-api'
 export * from './shared'
 
+process.env.NODE_ENV = 'test'
+
 chai.use(chaiStruct)
 
 export const start = setup => done => {
