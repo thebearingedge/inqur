@@ -1,5 +1,5 @@
 require('dotenv/config')
-const { IgnorePlugin, DefinePlugin } = require('webpack')
+const { DefinePlugin } = require('webpack')
 const BabiliPlugin = require('babili-webpack-plugin')
 
 const {
@@ -11,19 +11,17 @@ const {
 
 const API_URL = `${API_SCHEME}://${API_HOSTNAME}:${API_PORT}`
 
+const define = new DefinePlugin({
+  'process.env.API_URL': JSON.stringify(API_URL)
+})
+
+const babili = NODE_ENV === 'production' ? new BabiliPlugin() : undefined
+
 module.exports = {
   webpack: config => {
     config.plugins = config.plugins
-      .concat(
-        new DefinePlugin({
-          'process.env.API_URL': JSON.stringify(API_URL)
-        }),
-        new IgnorePlugin(/pages.*\/test.*/)
-      )
-      .filter(plugin => plugin.constructor.name !== 'UglifyJsPlugin')
-    if (NODE_ENV !== 'development') {
-      config.plugins.push(new BabiliPlugin())
-    }
+      .filter(({ constructor }) => constructor.name !== 'UglifyJsPlugin')
+      .concat(define, babili)
     return config
   }
 }
