@@ -11,19 +11,18 @@ const {
 
 const API_URL = `${API_SCHEME}://${API_HOSTNAME}:${API_PORT}`
 
-const noop = () => ({ apply() {} })
-
 const define = new DefinePlugin({
   'process.env.API_URL': JSON.stringify(API_URL)
 })
 
-const babili = NODE_ENV === 'production' ? new BabiliPlugin() : noop()
-
 module.exports = {
   webpack: config => {
-    config.plugins = config.plugins
+    const plugins = config.plugins
       .filter(({ constructor }) => constructor.name !== 'UglifyJsPlugin')
-      .concat(define, babili)
-    return config
+      .concat(define)
+    if (NODE_ENV === 'production') {
+      plugins.push(new BabiliPlugin())
+    }
+    return { ...config, plugins }
   }
 }
