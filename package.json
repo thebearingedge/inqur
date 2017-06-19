@@ -79,7 +79,6 @@
     "babel-plugin-transform-object-rest-spread": "6.23.0",
     "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-register": "6.24.1",
-    "babili-webpack-plugin": "0.1.1",
     "chai": "4.0.2",
     "chai-enzyme": "0.7.1",
     "chai-struct": "3.0.0",
