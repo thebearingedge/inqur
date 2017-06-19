@@ -17,12 +17,12 @@ const define = new DefinePlugin({
 
 module.exports = {
   webpack: config => {
-    const plugins = config.plugins
+    config.plugins = config.plugins
       .filter(({ constructor }) => constructor.name !== 'UglifyJsPlugin')
       .concat(define)
     if (NODE_ENV === 'production') {
-      plugins.push(new BabiliPlugin())
+      config.plugins.push(new BabiliPlugin())
     }
-    return { ...config, plugins }
+    return config
   }
 }
