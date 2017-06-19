@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const A = styled.a`
   display: inline-block;
-  padding: 10px 25px;
+  padding: 0.833em 1.25em;
   font-size: 0.875em;
   text-decoration: none;
   cursor: pointer;

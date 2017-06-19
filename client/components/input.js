@@ -7,8 +7,8 @@ const Wrapper = styled.div`
 
   & > input {
     width: 320px;
-    height: 32px;
-    padding: 5px 10px;
+    height: 2.5em;
+    padding: 0.4em 0.8em;
     border: 1px solid transparent;
     border-radius: 5px;
     font: inherit;
@@ -28,15 +28,15 @@ const Wrapper = styled.div`
   }
 
   & input::placeholder {
-    font-size: 13px;
+    font-size: 0.9em;
   }
 `
 
 const Message = styled.span`
   position: absolute;
-  left: calc(100% + 0.7em);
-  top: 0.4em;
-  padding: 2px 3px;
+  left: calc(100% + 9px);
+  top: 6px;
+  padding: 0.167em 0.250em;
   border: 2px solid #d43030;
   border-radius: 4px;
   font-size: 0.82em;
@@ -48,7 +48,7 @@ const Message = styled.span`
 
 const Pointer = styled.span`
   position: absolute;
-  top: 4px;
+  top: 5px;
   left: -12px;
   width: 0;
   height: 0;

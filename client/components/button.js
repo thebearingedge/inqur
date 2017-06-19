@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Button = styled.button`
   display: inline-block;
-  padding: 10px 25px;
+  padding: 0.833em 2em;
   border: none;
   border-radius: 2px;
   font: inherit;
@@ -10,13 +10,12 @@ const Button = styled.button`
   letter-spacing: 0.02em;
   outline: 0;
   color: inherit;
+  cursor: pointer;
   background-color: ${({ disabled }) =>
     disabled
       ? 'rgb(157, 160, 190)'
       : 'rgb(92, 105, 255)'
     };
-
-  cursor: pointer;
 
   &:hover {
     background-color: rgb(99, 111, 255);
