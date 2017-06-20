@@ -5,3 +5,4 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/thebearingedge/inqur.svg)](https://greenkeeper.io/)
 [![dependencies Status](https://david-dm.org/thebearingedge/inqur/status.svg)](https://david-dm.org/thebearingedge/inqur)
 [![devDependencies Status](https://david-dm.org/thebearingedge/inqur/dev-status.svg)](https://david-dm.org/thebearingedge/inqur?type=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
