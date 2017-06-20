@@ -1,4 +1,4 @@
-# voting-app
+# inqur
 
 [![Build Status](https://travis-ci.org/thebearingedge/inqur.svg?branch=master)](https://travis-ci.org/thebearingedge/inqur)
 [![codecov](https://codecov.io/gh/thebearingedge/inqur/branch/master/graph/badge.svg)](https://codecov.io/gh/thebearingedge/inqur)
