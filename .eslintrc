@@ -1,0 +1,24 @@
+{
+  "extends": ["standard", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2017
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "padded-blocks": 0,
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "react/prop-types": 0
+  }
+}

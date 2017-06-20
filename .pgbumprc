@@ -1,0 +1,6 @@
+{
+  "connection": {
+    "database": "inqur"
+  },
+  "files": "db/migrations"
+}
