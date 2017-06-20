@@ -24,7 +24,7 @@
     "watch:client": "node client/",
     "dev": "run-p -s watch:*",
     "test": "run-p -s 'test:** -- -R mocha-silent-reporter'",
-    "e2e:build": "run-s -s db:cycle && next build client/",
+    "e2e:build": "rimraf client/.next && run-s -s db:cycle && next build client/",
     "e2e:test": "mocha -t 0 -r babel-register e2e/*.test.js",
     "e2e": "run-s -s e2e:build e2e:test",
     "cover": "nyc run-s -s test e2e",
@@ -37,9 +37,8 @@
     "type": "git",
     "url": "git+https://github.com/thebearingedge/voting-app.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "LicenseRef-LICENSE",
+  "author": "Tim Davis",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/thebearingedge/voting-app/issues"
   },
@@ -105,6 +104,7 @@
     "pg-bump": "0.0.1",
     "react-test-renderer": "15.6.1",
     "redux-mock-store": "1.2.3",
+    "rimraf": "2.6.1",
     "sinon": "2.3.4",
     "sinon-chai": "2.11.0",
     "webpack": "3.0.0"
