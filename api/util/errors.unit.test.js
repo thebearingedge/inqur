@@ -18,6 +18,18 @@ describe('errors', () => {
     })
   })
 
+  describe('Unauthorized', () => {
+    it('has a 401 status', () => {
+      const err = new errors.Unauthorized()
+      expect(err).to.have.property('error', 'Unauthorized')
+      expect(err).to.have.property('statusCode', 401)
+      expect(err.toJSON()).to.include({
+        error: 'Unauthorized',
+        statusCode: 401
+      })
+    })
+  })
+
   describe('ValidationError', () => {
     it('is a BadRequest error', () => {
       const err = new errors.ValidationError()
