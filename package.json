@@ -1,7 +1,7 @@
 {
   "name": "inqur",
   "version": "1.0.0",
-  "description": "freeCodeCamp: Build a Voting App",
+  "description": "A web app for pollsters who want the opinion of the internet.",
   "main": "build/",
   "scripts": {
     "db:make": "pg-bump create",
@@ -35,14 +35,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thebearingedge/voting-app.git"
+    "url": "git+https://github.com/thebearingedge/inqur.git"
   },
   "author": "Tim Davis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thebearingedge/voting-app/issues"
+    "url": "https://github.com/thebearingedge/inqur/issues"
   },
-  "homepage": "https://github.com/thebearingedge/voting-app#readme",
+  "homepage": "https://github.com/thebearingedge/inqur#readme",
   "dependencies": {
     "axios": "0.16.2",
     "bcrypt": "1.0.2",
