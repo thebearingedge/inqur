@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import { before, after } from 'mocha'
-import knex from '../api/data'
 import Nightmare from 'nightmare'
+import { knex } from '../api/data'
 import createApi from '../api/create-api'
 import createClient from '../client/create-client'
 

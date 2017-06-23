@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import knex from './data'
+import { knex } from './data'
 import createApi from './create-api'
 
 createApi(knex)

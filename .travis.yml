@@ -12,6 +12,7 @@ addons:
   postgresql: 9.6
 services:
   - postgresql
+  - redis-server
 before_install:
   - npm install -g greenkeeper-lockfile@1
   - npm install -g codecov
