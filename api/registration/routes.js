@@ -26,14 +26,11 @@ export const canRegister = users =>
   })
 
 export default function routes(knex) {
-
-  const router = new Router()
   const users = usersData(knex)
-
+  const router = new Router()
   router
     .route('/')
     .post(validate({ body: newUser }), register(users))
     .get(validate({ query: newUsername }), canRegister(users))
-
   return router
 }

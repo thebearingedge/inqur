@@ -14,7 +14,7 @@
     "test:api:db": "mocha -r babel-register **/*.db.test.js",
     "tdd:api:db": "run-s -s 'test:api:db -- -w -R min'",
     "test:api:int": "mocha -r babel-register api/**/*.int.test.js",
-    "tdd:api:int": "run-s -s 'test:server -- -w -R min'",
+    "tdd:api:int": "run-s -s 'test:api:int -- -w -R min'",
     "test:client:unit": "mocha -r babel-register client/**/*.unit.test.js",
     "tdd:client:unit": "run-s -s 'test:client:unit -- -w -R min'",
     "test:client:int": "mocha -r babel-register client/**/*.int.test.js",
