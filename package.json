@@ -9,7 +9,7 @@
     "db:down": "pg-bump down",
     "db:stat": "pg-bump status",
     "db:cycle": "run-s -s db:down db:up",
-    "test:api:unit": "mocha -r babel-register **/*.unit.test.js",
+    "test:api:unit": "mocha -r babel-register api/**/*.unit.test.js",
     "tdd:api:unit": "run-s -s 'test:api:unit -- -w -R min'",
     "test:api:db": "mocha -r babel-register **/*.db.test.js",
     "tdd:api:db": "run-s -s 'test:api:db -- -w -R min'",
