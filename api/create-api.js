@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import { errors } from './util'
 import registration from './registration/routes'
-import authenticate from './security/routes'
+import authenticate from './authentication/routes'
 
 export default function createApi(knex, redis) {
   return express()
