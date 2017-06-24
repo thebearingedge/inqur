@@ -1,8 +1,8 @@
 import 'dotenv/config'
-import knex from './data'
+import { knex, redis } from './data'
 import createApi from './create-api'
 
-createApi(knex)
+createApi(knex, redis)
   .listen(process.env.API_PORT, () => {
     process.env.NODE_ENV !== 'production' &&
     // eslint-disable-next-line

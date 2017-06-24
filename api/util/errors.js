@@ -9,6 +9,11 @@ export class CustomError extends Error {
 
 export class ClientError extends CustomError {}
 
+export class Unauthorized extends ClientError {
+  get error() { return 'Unauthorized' }
+  get statusCode() { return 401 }
+}
+
 export class BadRequest extends ClientError {
   get error() { return 'Bad Request' }
   get statusCode() { return 400 }

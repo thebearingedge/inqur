@@ -1,8 +1,9 @@
 import 'dotenv/config'
 import { before, after } from 'mocha'
-import knex from '../api/data'
 import Nightmare from 'nightmare'
+import { knex, redis } from '../api/data'
 import createApi from '../api/create-api'
+import { fakeUser } from '../api/test/fixtures'
 import createClient from '../client/create-client'
 
 let api
@@ -14,7 +15,7 @@ const browser = new Nightmare({
 
 before(done => {
   Promise.all([
-    createApi(knex),
+    createApi(knex, redis),
     createClient({ dev: false })
   ])
   .then(([_api, _client]) => {
@@ -35,6 +36,8 @@ const {
 const baseUrl = `${CLIENT_SCHEME}://${CLIENT_HOSTNAME}:${CLIENT_PORT}`
 
 export {
+  fakeUser,
   browser,
-  baseUrl
+  baseUrl,
+  knex
 }

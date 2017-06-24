@@ -13,7 +13,8 @@
     "**/index.js",
     "**/*.test.js",
     "**/*.config.js",
-    "**/_document.js"
+    "client/pages/",
+    "client/layouts/"
   ],
   "all": true
 }

@@ -14,6 +14,9 @@
   ],
   "rules": {
     "padded-blocks": 0,
+    "brace-style": ["error", "stroustrup", {
+      "allowSingleLine": true
+    }],
     "space-before-function-paren": ["error", {
       "anonymous": "always",
       "named": "never",

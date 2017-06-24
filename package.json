@@ -1,7 +1,7 @@
 {
   "name": "inqur",
   "version": "1.0.0",
-  "description": "freeCodeCamp: Build a Voting App",
+  "description": "A web app for pollsters who want the opinion of the internet.",
   "main": "build/",
   "scripts": {
     "db:make": "pg-bump create",
@@ -9,12 +9,12 @@
     "db:down": "pg-bump down",
     "db:stat": "pg-bump status",
     "db:cycle": "run-s -s db:down db:up",
-    "test:api:unit": "mocha -r babel-register **/*.unit.test.js",
-    "tdd:api:unit": "run-s -s 'test:api -- -w -R min'",
+    "test:api:unit": "mocha -r babel-register api/**/*.unit.test.js",
+    "tdd:api:unit": "run-s -s 'test:api:unit -- -w -R min'",
     "test:api:db": "mocha -r babel-register **/*.db.test.js",
     "tdd:api:db": "run-s -s 'test:api:db -- -w -R min'",
     "test:api:int": "mocha -r babel-register api/**/*.int.test.js",
-    "tdd:api:int": "run-s -s 'test:server -- -w -R min'",
+    "tdd:api:int": "run-s -s 'test:api:int -- -w -R min'",
     "test:client:unit": "mocha -r babel-register client/**/*.unit.test.js",
     "tdd:client:unit": "run-s -s 'test:client:unit -- -w -R min'",
     "test:client:int": "mocha -r babel-register client/**/*.int.test.js",
@@ -35,14 +35,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thebearingedge/voting-app.git"
+    "url": "git+https://github.com/thebearingedge/inqur.git"
   },
   "author": "Tim Davis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thebearingedge/voting-app/issues"
+    "url": "https://github.com/thebearingedge/inqur/issues"
   },
-  "homepage": "https://github.com/thebearingedge/voting-app#readme",
+  "homepage": "https://github.com/thebearingedge/inqur#readme",
   "dependencies": {
     "axios": "0.16.2",
     "bcrypt": "1.0.2",
@@ -55,6 +55,7 @@
     "es6-error": "4.0.2",
     "express": "4.15.3",
     "joi": "10.6.0",
+    "jsonwebtoken": "7.4.1",
     "knex": "0.13.0",
     "next": "2.4.4",
     "next-redux-wrapper": "1.1.3",
@@ -63,6 +64,7 @@
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-redux": "5.0.5",
+    "redis": "2.7.1",
     "redux": "3.7.0",
     "redux-form": "6.8.0",
     "redux-thunk": "2.2.0",

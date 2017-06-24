@@ -4,9 +4,9 @@ import moxios from 'moxios'
 import Router from 'next/router'
 import { withStore, expect, mount, stub } from '../test/integration'
 import { api } from '../core'
-import { Register } from './register'
+import Register from './register'
 
-describe('registration', () => {
+describe('registration/register', () => {
 
   const connect = withStore({ api, Router })
   const Connected = connect(Register)()

@@ -4,7 +4,7 @@ import { begin, expect } from '../test/db'
 import { User, fakeUser } from '../test/fixtures'
 import usersData from './users-data'
 
-describe('usersData', () => {
+describe('registration/users-data', () => {
 
   let trx
   let users
