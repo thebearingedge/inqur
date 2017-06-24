@@ -83,7 +83,7 @@
     "chai": "4.0.2",
     "chai-enzyme": "0.7.1",
     "chai-struct": "3.0.0",
-    "enzyme": "2.9.0",
+    "enzyme": "2.9.1",
     "eslint": "4.0.0",
     "eslint-config-standard": "10.2.1",
     "eslint-plugin-import": "2.6.0",
