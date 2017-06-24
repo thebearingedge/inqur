@@ -3,3 +3,8 @@ export const onSubmit = credentials =>
     const { data } = await api.post('/authenticate', credentials)
     return data
   }
+
+export const onSubmitSuccess = () =>
+  (dispatch, getState, { Router }) => {
+    Router.push('/')
+  }
