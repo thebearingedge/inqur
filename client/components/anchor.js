@@ -19,9 +19,12 @@ const A = styled.a`
   }
 `
 
-const Anchor = ({ children, ...props }) =>
-  <Link>
-    <A { ...props }>{ children }</A>
+const Anchor = ({ children, href, prefetch, ...props }) =>
+  <Link
+    href={ href }
+    prefetch={ process.env.NODE_ENV !== 'test' }
+    { ...props }>
+    <A href={ href }>{ children }</A>
   </Link>
 
 export default Anchor
