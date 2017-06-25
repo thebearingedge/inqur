@@ -14,9 +14,7 @@ promisifyAll(RedisClient.prototype)
 
 export const knex = new Knex({
   client: 'pg',
-  connection: {
-    database: process.env.PGDATABASE
-  }
+  connection: process.env.POSTGRES_URL
 })
 
 export const redis = createClient(process.env.REDIS_URL)

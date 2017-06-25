@@ -1,6 +1,4 @@
 {
-  "connection": {
-    "database": "inqur"
-  },
+  "connectionVar": "POSTGRES_URL",
   "files": "db/migrations"
 }
