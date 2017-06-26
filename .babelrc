@@ -5,5 +5,12 @@
     "transform-export-extensions",
     "transform-react-jsx",
     ["styled-components", { "ssr": true }]
-  ]
+  ],
+  "env": {
+    "production": {
+      "presets": [
+        "env"
+      ]
+    }
+  }
 }

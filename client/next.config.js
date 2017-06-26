@@ -9,15 +9,16 @@ const {
 
 const API_URL = `${API_SCHEME}://${API_HOSTNAME}:${API_PORT}`
 
-const define = new DefinePlugin({
-  'process.env.API_URL': JSON.stringify(API_URL)
-})
-
 module.exports = {
   webpack: config => {
     config.plugins = config.plugins
-      .filter(({ constructor }) => constructor.name !== 'UglifyJsPlugin')
-      .concat(define)
+      .filter(plugin =>
+        process.env.NODE_ENV === 'production' ||
+        plugin.constructor.name !== 'UglifyJsPlugin'
+      )
+      .concat(new DefinePlugin({
+        'process.env.API_URL': JSON.stringify(API_URL)
+      }))
     return config
   }
 }
