@@ -4,8 +4,8 @@ import usersData from './users-data'
 import { wrap, validate } from '../util'
 
 const newUser = joi.object().keys({
-  username: joi.string().trim().required(),
-  password: joi.string().trim().required(),
+  username: joi.string().trim().min(3).max(63).alphanum().required(),
+  password: joi.string().trim().min(6).required(),
   email: joi.string().trim().email().required()
 })
 

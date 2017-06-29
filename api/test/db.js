@@ -9,12 +9,13 @@ after(() => Promise.all([
 
 beforeEach(() => redis.flushallAsync())
 
+export const rejected = promise => promise.catch(err => err)
+
 export const begin = setup => done => {
-  knex.transaction(trx => {
+  rejected(knex.transaction(trx => {
     setup(trx)
     done()
-  })
-  .catch(_ => _)
+  }))
 }
 
 export { redis }
