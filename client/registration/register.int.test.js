@@ -57,6 +57,16 @@ describe('registration/register', () => {
     expect(email.parent()).not.to.have.text('A valid email is required.')
   })
 
+  it('requires a valid password', () => {
+    const password = wrapper
+      .find('[name="password"]')
+      .first()
+    password.simulate('change', { target: { value: 'foo' } })
+    expect(password.parent()).to.have.text('Password must be at least 6 characters.')
+    password.simulate('change', { target: { value: 'foo bar' } })
+    expect(password.parent()).to.have.text('What do you want your password to be?')
+  })
+
   it('requires matching passwords', () => {
     const password = wrapper
       .find('[name="password"]')

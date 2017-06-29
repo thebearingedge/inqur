@@ -13,6 +13,13 @@ const validateUsername = username => {
   return null
 }
 
+const validatePassword = password => {
+  const { length } = password
+  if (!length || password.includes(' ')) return 'What do you want your password to be?'
+  if (length < 6) return 'Password must be at least 6 characters.'
+  return null
+}
+
 export const validate = ({
   username = '',
   email = '',
@@ -21,7 +28,7 @@ export const validate = ({
 }) => ({
   username: validateUsername(username.trim()),
   email: isEmail(email) ? null : 'A valid email is required.',
-  password: password.trim() ? null : 'Please choose a password.',
+  password: validatePassword(password.trim()),
   retypePassword: password.trim() === retypePassword.trim()
     ? null
     : 'Passwords must match.'
