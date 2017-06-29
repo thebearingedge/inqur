@@ -2,6 +2,7 @@ import { describe, beforeEach, afterEach, it } from 'mocha'
 import React from 'react'
 import moxios from 'moxios'
 import Router from 'next/router'
+import { fakeUser } from '../../api/test/fixtures'
 import { withStore, expect, mount, stub } from '../test/integration'
 import { api } from '../core'
 import Register from './register'
@@ -34,6 +35,18 @@ describe('registration/register', () => {
     })
   })
 
+  it('requires a valid username', () => {
+    const username = wrapper
+      .find('[name="username"]')
+      .first()
+    username.simulate('change', { target: { value: 'foo' } })
+    expect(username.parent()).to.have.text('Your username must be at least 4 characters long.')
+    username.simulate('change', { target: { value: 'foo_' } })
+    expect(username.parent()).to.have.text('Usernames can only contain letters and numbers.')
+    username.simulate('change', { target: { value: Array(64).fill('x').join('') } })
+    expect(username.parent()).to.have.text('Usernames cannot be more than 63 characters.')
+  })
+
   it('requires a valid email', () => {
     const email = wrapper
       .find('[name="email"]')
@@ -58,33 +71,34 @@ describe('registration/register', () => {
   })
 
   it('registers a user and changes routes', done => {
+    const { username, email, password } = fakeUser()
     Router.push
       .withArgs('/')
       .callsFake(() => done())
-    moxios.stubRequest('/registration?username=foo', {
+    moxios.stubRequest(`/registration?username=${username}`, {
       status: 200,
-      response: { username: 'foo', isAvailable: true }
+      response: { username, isAvailable: true }
     })
     moxios.stubOnce('POST', '/registration', {
       status: 201,
-      response: { username: 'foo' }
+      response: { username, email }
     })
     wrapper
       .find('[name="username"]')
       .first()
-      .simulate('change', { target: { value: 'foo' } })
+      .simulate('change', { target: { value: username } })
     wrapper
       .find('[name="email"]')
       .first()
-      .simulate('change', { target: { value: 'foo@bar.baz' } })
+      .simulate('change', { target: { value: email } })
     wrapper
       .find('[name="password"]')
       .first()
-      .simulate('change', { target: { value: 'foo' } })
+      .simulate('change', { target: { value: password } })
     wrapper
       .find('[name="retypePassword"]')
       .first()
-      .simulate('change', { target: { value: 'foo' } })
+      .simulate('change', { target: { value: password } })
     wrapper.find('[type="submit"]').simulate('submit')
   })
 
