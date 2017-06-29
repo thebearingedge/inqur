@@ -28,6 +28,18 @@ describe('registration/routes', () => {
       })
     })
 
+    describe('when the user supplies an invalid password', () => {
+      it('returns a Bad Request error', async () => {
+        const user = fakeUser()
+        const profile = { ...user, password: user.password.slice(0, 5) }
+        const { data } = await request.post('/registration', profile)
+        expect(data).to.include({
+          statusCode: 400,
+          error: 'Bad Request'
+        })
+      })
+    })
+
     describe('when the user supplies a valid profile', () => {
       it('stores the new user', async () => {
         const profile = fakeUser()
