@@ -16,9 +16,10 @@ describe('registration/routes', () => {
 
   describe('POST /registration', () => {
 
-    describe('when the user supplies an invalid profile', () => {
+    describe('when the user supplies an invalid username', () => {
       it('returns a Bad Request error', async () => {
-        const profile = { username: 'foo' }
+        const user = fakeUser()
+        const profile = { ...user, username: `${user.username}_` }
         const { data } = await request.post('/registration', profile)
         expect(data).to.include({
           statusCode: 400,
