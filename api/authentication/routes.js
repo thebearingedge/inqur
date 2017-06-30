@@ -13,7 +13,7 @@ const credentials = joi.object().keys({
 export const authenticate = (users, tokens) =>
   wrap(async (req, res, next) => {
     const { username, password } = req.body
-    const found = await users.findByUsername(username)
+    const found = await users.find(username)
     if (!found) throw new errors.Unauthorized('Invalid Login')
     const { password: hashed, ...user } = found
     const match = await bcrypt.compare(password, hashed)
