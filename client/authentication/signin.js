@@ -3,13 +3,14 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { reduxForm, Field } from 'redux-form'
 
-import { Input, Fields, Button, Anchor, Controls } from '../components'
+import { Input, FormError, Fields, Button, Anchor, Controls } from '../components'
 import { onSubmit, onSubmitSuccess } from './actions'
 import { validate } from './helpers'
 
-const Page = ({ handleSubmit, submitting }) =>
+const Page = ({ handleSubmit, submitting, error }) =>
   <form noValidate onSubmit={ handleSubmit }>
     <Fields>
+      <FormError error={ error }/>
       <Field
         autoFocus
         name='username'
