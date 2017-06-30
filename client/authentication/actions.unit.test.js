@@ -3,7 +3,7 @@ import { injectStore, expect, stub } from '../test/unit'
 import { api } from '../core'
 import { onSubmit } from './actions'
 
-describe('security/actions', () => {
+describe('authentication/actions', () => {
 
   let store
 
