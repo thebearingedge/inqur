@@ -15,3 +15,13 @@ export const onSubmitSuccess = () =>
   (dispatch, getState, { Router }) => {
     Router.push('/')
   }
+
+export const signinFailed = message => ({
+  type: types.SIGNIN_FAILED,
+  message
+})
+
+export const onSubmitFail = (errors, dispatch, submitError) =>
+  dispatch => {
+    dispatch(signinFailed(submitError.message))
+  }

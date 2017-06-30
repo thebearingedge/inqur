@@ -34,4 +34,18 @@ describe('authentication/actions', () => {
 
   })
 
+  describe('onSubmitFail', () => {
+
+    afterEach(() => store.clearActions())
+
+    it('dispatches a failure action', () => {
+      const submitError = new Error('Login Failed.')
+      store.dispatch(actions.onSubmitFail({}, store.dispatch, submitError))
+      expect(store.getActions()).to.deep.equal([
+        actions.signinFailed(submitError.message)
+      ])
+    })
+
+  })
+
 })
