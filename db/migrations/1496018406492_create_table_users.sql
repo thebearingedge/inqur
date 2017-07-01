@@ -4,7 +4,8 @@ create table users (
   email    email    not null,
   password text     not null,
   primary key (user_id),
-  unique (username)
+  unique (username),
+  unique (email)
 );
 
 select add_timestamps('users');

@@ -19,13 +19,18 @@ before(done => {
     createClient({ dev: false })
   ])
   .then(([_api, _client]) => {
-    api = _api.listen(process.env.API_PORT, () => {
+    api = _api.listen(process.env.API_PORT, err => {
+      if (err) return done(err)
       client = _client.listen(process.env.CLIENT_PORT, done)
     })
   })
 })
 
-after(() => api.close(() => client.close()))
+after(() => {
+  api && api.close(() => {
+    client && client.close()
+  })
+})
 
 const {
   CLIENT_SCHEME,

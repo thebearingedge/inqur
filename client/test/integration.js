@@ -21,13 +21,18 @@ afterEach(() => {
   Object.assign(global, { window, document, navigator })
 })
 
-export const withStore = env => Component => state =>
-  function Wrapped(props) {
-    return (
-      <Provider store={ initStore(env)(state) }>
-        <Component { ...props }/>
-      </Provider>
-    )
+export const withStore = env => Component => state => {
+  const store = initStore(env)(state)
+  return {
+    store,
+    WithStore: function WithStore(props) {
+      return (
+        <Provider store={ store }>
+          <Component { ...props }/>
+        </Provider>
+      )
+    }
   }
+}
 
 export { mount }

@@ -9,12 +9,12 @@ import Register from './register'
 
 describe('registration/register', () => {
 
-  const connect = withStore({ api, Router })
-  const Connected = connect(Register)()
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(<Connected/>)
+    const provide = withStore({ api, Router })
+    const { WithStore } = provide(Register)()
+    wrapper = mount(<WithStore/>)
     moxios.install(api)
     stub(Router, 'push')
   })

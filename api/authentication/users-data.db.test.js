@@ -15,22 +15,31 @@ describe('security/users-data', () => {
 
   afterEach(() => trx.rollback())
 
-  describe('findByUsername', () => {
+  describe('find', () => {
 
     describe('when a user exists', () => {
 
+      let email
       let username
 
       beforeEach(async () => {
-        const [{ username: _username }] = await trx
+        const [{ username: _username, email: _email }] = await trx
           .insert(fakeUser())
           .into('users')
           .returning('*')
+        email = _email
         username = _username
       })
 
-      it('returns the user', async () => {
-        const user = await users.findByUsername(username)
+      it('finds the user by email', async () => {
+        const user = await users.find(username)
+        expect(user)
+          .to.be.an('object')
+          .and.not.equal(null)
+      })
+
+      it('finds the user by username', async () => {
+        const user = await users.find(email)
         expect(user)
           .to.be.an('object')
           .and.not.equal(null)
@@ -42,7 +51,7 @@ describe('security/users-data', () => {
 
       it('returns null', async () => {
         const { username } = fakeUser()
-        const user = await users.findByUsername(username)
+        const user = await users.find(username)
         expect(user).to.equal(null)
       })
 

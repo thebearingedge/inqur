@@ -13,3 +13,5 @@ export const injectStore = (env = {}) => configureStore([
 ])
 
 export const rejected = promise => promise.catch(err => err)
+
+export const INIT = '@@redux/INIT'

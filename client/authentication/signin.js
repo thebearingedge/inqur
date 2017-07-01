@@ -3,40 +3,49 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { reduxForm, Field } from 'redux-form'
 
-import { Input, Fields, Button, Anchor, Controls } from '../components'
-import { onSubmit, onSubmitSuccess } from './actions'
+import { Input, FormError, Fields, Button, Anchor, Controls } from '../components'
+import { onSubmit, onSubmitSuccess, onSubmitFail } from './actions'
 import { validate } from './helpers'
 
-const Page = ({ handleSubmit, submitting }) =>
-  <form noValidate onSubmit={ handleSubmit }>
-    <Fields>
-      <Field
-        autoFocus
-        name='username'
-        type='text'
-        placeholder='Username'
-        component={ Input }/>
-      <Field
-        name='password'
-        type='password'
-        placeholder='Password'
-        component={ Input }/>
-    </Fields>
-    <Controls>
-      <Anchor prefetch href='/register'>need an account?</Anchor>
-      <Button type='submit' disabled={ submitting }>Sign In</Button>
-    </Controls>
-  </form>
+const Page = ({ handleSubmit, onSubmit, submitting, signinError }) => {
+  return (
+    <form noValidate onSubmit={ handleSubmit }>
+      <Fields>
+        <FormError error={ signinError } submitting={ submitting }/>
+        <Field
+          autoFocus
+          name='username'
+          type='text'
+          placeholder='Username or Email'
+          component={ Input }/>
+        <Field
+          name='password'
+          type='password'
+          placeholder='Password'
+          component={ Input }/>
+      </Fields>
+      <Controls>
+        <Anchor prefetch href='/register'>need an account?</Anchor>
+        <Button type='submit' disabled={ submitting }>Sign In</Button>
+      </Controls>
+    </form>
+  )
+}
+
+export const mapState = ({ signin: { signinError } }) => ({
+  signinError
+})
 
 export const mapDispatch = dispatch => bindActionCreators({
   onSubmit,
+  onSubmitFail,
   onSubmitSuccess
 }, dispatch)
 
-export const Signin = (reduxForm({
+export const Signin = reduxForm({
   form: 'signin',
   validate,
   touchOnBlur: false
-})(Page))
+})(Page)
 
-export default connect(null, mapDispatch)(Signin)
+export default connect(mapState, mapDispatch)(Signin)

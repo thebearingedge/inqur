@@ -2,13 +2,14 @@ import { camelSql } from '../util'
 
 export default function usersData(knex) {
 
-  return camelSql({ findByUsername })
+  return camelSql({ find })
 
-  async function findByUsername(username) {
+  async function find(usernameOrEmail) {
     const user = await knex
       .select('*')
       .from('users')
-      .where({ username })
+      .where({ username: usernameOrEmail })
+      .orWhere({ email: usernameOrEmail })
       .first()
     return user || null
   }

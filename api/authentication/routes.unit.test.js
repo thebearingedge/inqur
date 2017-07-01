@@ -9,7 +9,7 @@ import usersData from './users-data'
 import tokensData from './tokens-data'
 import * as routes from './routes'
 
-describe('security/routes', () => {
+describe('authentication/routes', () => {
 
   describe('authenticate', () => {
 
@@ -27,7 +27,7 @@ describe('security/routes', () => {
       const user = fakeUser()
       const setup = (req, res, next) => {
         req.body = user
-        stub(users, 'findByUsername').resolves(null)
+        stub(users, 'find').resolves(null)
         next()
       }
       it('returns an Unauthorized error', async () => {
@@ -41,7 +41,7 @@ describe('security/routes', () => {
       const user = fakeUser()
       const setup = (req, res, next) => {
         req.body = user
-        stub(users, 'findByUsername').resolves({ ...user, password: 'foo' })
+        stub(users, 'find').resolves({ ...user, password: 'foo' })
         next()
       }
       it('returns an Unauthorized error', async () => {
@@ -64,7 +64,7 @@ describe('security/routes', () => {
         token = jwt.sign(user, process.env.TOKEN_SECRET)
         setup = (req, res, next) => {
           req.body = { password, ...user }
-          stub(users, 'findByUsername')
+          stub(users, 'find')
             .withArgs(user.username)
             .resolves({ ...user, password: hashed })
           stub(tokens, 'issue')
