@@ -38,12 +38,24 @@ describe('authentication/actions', () => {
 
     afterEach(() => store.clearActions())
 
-    it('dispatches a failure action', () => {
-      const submitError = new Error('Login Failed.')
-      store.dispatch(actions.onSubmitFail({}, store.dispatch, submitError))
-      expect(store.getActions()).to.deep.equal([
-        actions.signinFailed(submitError.message)
-      ])
+    describe('when authentication fails', () => {
+      it('dispatches a login failure action', () => {
+        const submitError = { ...new Error(), response: { status: 401 } }
+        store.dispatch(actions.onSubmitFail({}, store.dispatch, submitError))
+        expect(store.getActions()).to.deep.equal([
+          actions.signinFailed('Your login information was incorrect.')
+        ])
+      })
+    })
+
+    describe('when a different error occurs', () => {
+      it('dispatches a general failure action', () => {
+        const submitError = new Error('An unexpected error occurred.')
+        store.dispatch(actions.onSubmitFail({}, store.dispatch, submitError))
+        expect(store.getActions()).to.deep.equal([
+          actions.signinFailed(submitError.message)
+        ])
+      })
     })
 
   })
