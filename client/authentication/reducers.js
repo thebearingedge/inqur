@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import * as types from './action-types'
 
-export const error = (state = null, action) => {
+export const signinError = (state = null, action) => {
   switch (action.type) {
     case types.SIGNIN_FAILED:
       return action.message
@@ -12,4 +12,4 @@ export const error = (state = null, action) => {
   }
 }
 
-export default combineReducers({ error })
+export default combineReducers({ signinError })
