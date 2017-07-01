@@ -16,7 +16,7 @@ const Page = ({ handleSubmit, onSubmit, submitting, signinError }) => {
           autoFocus
           name='username'
           type='text'
-          placeholder='Username'
+          placeholder='Username or Email'
           component={ Input }/>
         <Field
           name='password'
