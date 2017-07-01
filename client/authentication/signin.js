@@ -7,11 +7,11 @@ import { Input, FormError, Fields, Button, Anchor, Controls } from '../component
 import { onSubmit, onSubmitSuccess, onSubmitFail } from './actions'
 import { validate } from './helpers'
 
-const Page = ({ handleSubmit, submitting, signinError }) => {
+const Page = ({ handleSubmit, onSubmit, submitting, signinError }) => {
   return (
     <form noValidate onSubmit={ handleSubmit }>
       <Fields>
-        <FormError error={ signinError }/>
+        <FormError error={ signinError } submitting={ submitting }/>
         <Field
           autoFocus
           name='username'
@@ -38,13 +38,13 @@ export const mapState = ({ signin: { signinError } }) => ({
 
 export const mapDispatch = dispatch => bindActionCreators({
   onSubmit,
+  onSubmitFail,
   onSubmitSuccess
 }, dispatch)
 
 export const Signin = reduxForm({
   form: 'signin',
   validate,
-  onSubmitFail,
   touchOnBlur: false
 })(Page)
 
