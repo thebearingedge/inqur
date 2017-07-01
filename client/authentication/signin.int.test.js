@@ -71,17 +71,17 @@ describe('authentication/signin', () => {
     wrapper.find('[type="submit"]').simulate('submit')
   })
 
-  it.only('displays authentication failure errors', done => {
+  it('displays authentication failure errors', done => {
     moxios.stubOnce('POST', '/authenticate', {
       status: 401,
       response: { error: 'Invalid Login' }
     })
     store.subscribe(() => {
-      const { authentication: { error } } = store.getState()
-      if (!error) return
+      const { signin: { signinError } } = store.getState()
+      if (!signinError) return
       setTimeout(() => {
         const formError = wrapper.find(FormError).first()
-        expect(formError).to.have.text('foo')
+        expect(formError).to.have.text('Your login information was incorrect.')
         done()
       })
     })

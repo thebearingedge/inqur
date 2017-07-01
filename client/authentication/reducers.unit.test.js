@@ -5,36 +5,40 @@ import * as reducers from './reducers'
 
 describe('authentication/reducers', () => {
 
-  describe(INIT, () => {
+  describe('signinError', () => {
 
-    it('returns null', () => {
-      const oldState = undefined
-      const action = { type: INIT }
-      const newState = reducers.error(oldState, action)
-      expect(newState).to.equal(null)
-    })
-
-    describe(types.SIGNIN_SUBMITTED, () => {
+    describe(INIT, () => {
 
       it('returns null', () => {
-        const oldState = 'Danger!'
-        const action = { type: types.SIGNIN_SUBMITTED }
-        const newState = reducers.error(oldState, action)
+        const oldState = undefined
+        const action = { type: INIT }
+        const newState = reducers.signinError(oldState, action)
         expect(newState).to.equal(null)
       })
 
-    })
+      describe(types.SIGNIN_VISITED, () => {
 
-    describe(types.SIGNIN_FAILED, () => {
+        it('returns null', () => {
+          const oldState = 'Danger!'
+          const action = { type: types.SIGNIN_VISITED }
+          const newState = reducers.signinError(oldState, action)
+          expect(newState).to.equal(null)
+        })
 
-      it('returns the action message', () => {
-        const oldState = null
-        const action = {
-          type: types.SIGNIN_FAILED,
-          message: 'Your login information was incorrect.'
-        }
-        const newState = reducers.error(oldState, action)
-        expect(newState).to.equal(action.message)
+      })
+
+      describe(types.SIGNIN_FAILED, () => {
+
+        it('returns the action message', () => {
+          const oldState = null
+          const action = {
+            type: types.SIGNIN_FAILED,
+            message: 'Your login information was incorrect.'
+          }
+          const newState = reducers.signinError(oldState, action)
+          expect(newState).to.equal(action.message)
+        })
+
       })
 
     })

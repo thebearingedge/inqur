@@ -1,13 +1,8 @@
 import * as types from './action-types'
 
-export const signinSubmitted = () => ({
-  type: types.SIGNIN_SUBMITTED
-})
-
 export const onSubmit = credentials =>
   async (dispatch, getState, { api }) => {
     const { data } = await api.post('/authenticate', credentials)
-    dispatch(signinSubmitted())
     return data
   }
 
@@ -30,3 +25,7 @@ export const onSubmitFail = (errors, dispatch, submitError) =>
     }
     dispatch(signinFailed('An unexpected error occurred.'))
   }
+
+export const signinVisited = () => ({
+  type: types.SIGNIN_VISITED
+})
