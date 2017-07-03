@@ -96,7 +96,7 @@
     "express-unit": "1.1.0",
     "faker": "4.1.0",
     "husky": "0.14.2",
-    "jsdom": "11.0.0",
+    "jsdom": "11.1.0",
     "mocha": "3.4.2",
     "mocha-silent-reporter": "1.0.0",
     "moxios": "0.4.0",
