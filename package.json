@@ -105,7 +105,7 @@
     "npm-run-all": "4.0.2",
     "nyc": "11.0.3",
     "onchange": "3.2.1",
-    "pg-bump": "1.0.1",
+    "pg-bump": "1.0.2",
     "react-test-renderer": "15.6.1",
     "redux-mock-store": "1.2.3",
     "rimraf": "2.6.1",
