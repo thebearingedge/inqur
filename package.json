@@ -70,7 +70,7 @@
     "redux-form": "6.8.0",
     "redux-thunk": "2.2.0",
     "snake-case": "2.1.0",
-    "styled-components": "2.1.0"
+    "styled-components": "2.1.1"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
