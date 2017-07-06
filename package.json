@@ -70,12 +70,12 @@
     "redux-form": "6.8.0",
     "redux-thunk": "2.2.0",
     "snake-case": "2.1.0",
-    "styled-components": "2.1.0"
+    "styled-components": "2.1.1"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
-    "babel-plugin-styled-components": "1.1.6",
+    "babel-plugin-styled-components": "1.1.7",
     "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
     "babel-plugin-transform-export-extensions": "6.22.0",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
@@ -95,8 +95,8 @@
     "eslint-plugin-standard": "3.0.1",
     "express-unit": "1.1.0",
     "faker": "4.1.0",
-    "husky": "0.14.2",
-    "jsdom": "11.0.0",
+    "jsdom": "11.1.0",
+    "husky": "0.14.3",
     "mocha": "3.4.2",
     "mocha-silent-reporter": "1.0.0",
     "moxios": "0.4.0",
