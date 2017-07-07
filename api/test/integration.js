@@ -12,14 +12,14 @@ chai.use(chaiStruct)
 
 export const start = setup => done => {
   begin(trx => {
-    const server = createApi(trx, redis).listen(process.env.API_TEST_PORT, () => {
+    const server = createApi(trx, redis).listen(process.env.API_PORT, () => {
       setup(trx, server)
     })
   })(done)
 }
 
 export const request = axios.create({
-  baseURL: `http://localhost:${process.env.API_TEST_PORT}`,
+  baseURL: `http://localhost:${process.env.API_PORT}`,
   validateStatus: () => true,
   paramsSerializer: qs.stringify
 })
