@@ -24,7 +24,7 @@
     "watch:api": "nodemon -x babel-node api",
     "watch:db": "onchange -iw 'db/**/*.sql' -- run-s -s db:cycle",
     "watch:client": "node client/",
-    "dev": "run-p -s watch:*",
+    "watch": "run-p -s watch:*",
     "clean": "rimraf client/.next",
     "pree2e": "NODE_ENV=development run-s -s clean build:client db:cycle",
     "e2e": "mocha -t 0 -r babel-register e2e/*.test.js",
