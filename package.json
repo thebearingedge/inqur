@@ -31,7 +31,10 @@
     "lint": "eslint api/ client/ e2e/",
     "build:client": "NODE_ENV=production next build client/",
     "start:client": "NODE_ENV=production node client/",
-    "precommit": "run-p -s lint"
+    "precommit": "run-s -s lint",
+    "pretravis": "run-s -s lint",
+    "travis": "nyc run-s -s db:cycle test:** e2e",
+    "posttravis": "codecov"
   },
   "repository": {
     "type": "git",
@@ -85,6 +88,7 @@
     "chai": "4.0.2",
     "chai-enzyme": "0.8.0",
     "chai-struct": "3.0.0",
+    "codecov": "2.2.0",
     "enzyme": "2.9.1",
     "eslint": "4.1.1",
     "eslint-config-standard": "10.2.1",
@@ -95,8 +99,8 @@
     "eslint-plugin-standard": "3.0.1",
     "express-unit": "1.1.0",
     "faker": "4.1.0",
-    "jsdom": "11.1.0",
     "husky": "0.14.3",
+    "jsdom": "11.1.0",
     "mocha": "3.4.2",
     "mocha-silent-reporter": "1.0.0",
     "moxios": "0.4.0",
