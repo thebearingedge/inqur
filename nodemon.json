@@ -3,11 +3,9 @@
     "api/**/*.js"
   ],
   "ignore": [
+    "e2e/",
     "test/",
     "*.test.js",
     "node_modules/**/node_modules/"
-  ],
-  "env": {
-    "NODE_ENV": "development"
-  }
+  ]
 }
