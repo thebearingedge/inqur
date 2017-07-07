@@ -32,13 +32,7 @@ after(() => {
   })
 })
 
-const {
-  CLIENT_SCHEME,
-  CLIENT_HOSTNAME,
-  CLIENT_PORT
-} = process.env
-
-const baseUrl = `${CLIENT_SCHEME}://${CLIENT_HOSTNAME}:${CLIENT_PORT}`
+const baseUrl = process.env.CLIENT_URL
 
 export {
   fakeUser,
