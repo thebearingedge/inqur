@@ -32,7 +32,6 @@
     "lint": "eslint api/ client/ e2e/",
     "build:client": "next build client/",
     "precommit": "run-s -s lint",
-    "pretravis": "run-s -s lint",
     "travis": "run-s -s lint cover",
     "posttravis": "codecov"
   },
