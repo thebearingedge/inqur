@@ -15,16 +15,15 @@ services:
   - redis-server
 before_install:
   - npm install -g greenkeeper-lockfile@1
-  - npm install -g codecov
+install:
+  - npm install
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - psql -U postgres -c 'create database inqur;'
-  - npm run db:up
   - greenkeeper-lockfile-update
   - sleep 3
 script:
-  - npm run cover
+  - npm run travis
 after_script:
   - greenkeeper-lockfile-upload
-  - codecov
