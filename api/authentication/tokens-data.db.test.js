@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { fakeUser } from '../test/fixtures'
 import tokensData from './tokens-data'
 
-describe('security/tokens-data', () => {
+describe('authentication/tokens-data', () => {
 
   let tokens
 
