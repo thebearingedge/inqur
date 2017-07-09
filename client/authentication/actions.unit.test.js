@@ -1,7 +1,8 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
+import Router from 'next/router'
 import { injectStore, expect, stub } from '../test/unit'
 import { api } from '../core'
-import * as types from './action-types'
+import * as types from './types'
 import * as actions from './actions'
 
 describe('authentication/actions', () => {
@@ -9,27 +10,14 @@ describe('authentication/actions', () => {
   let store
 
   beforeEach(() => {
-    store = injectStore({ api })()
-  })
-
-  describe('signinVisited', () => {
-
-    it('returns an action', () => {
-      expect(actions.signinVisited())
-        .to.be.an('object')
-        .with.property('type', types.SIGNIN_VISITED)
-    })
-
+    store = injectStore({ api, Router })()
   })
 
   describe('onSubmit', () => {
 
     beforeEach(() => stub(api, 'post'))
 
-    afterEach(() => {
-      api.post.restore()
-      store.clearActions()
-    })
+    afterEach(() => api.post.restore())
 
     it('posts a set of user credentials', async () => {
       const credentials = { username: 'foo', password: 'bar' }
@@ -42,9 +30,25 @@ describe('authentication/actions', () => {
 
   })
 
+  describe('onSubmitSuccess', () => {
+
+    beforeEach(() => stub(Router, 'push'))
+
+    afterEach(() => Router.push.restore())
+
+    it('changes routes', done => {
+      Router
+        .push
+        .withArgs('/')
+        .callsFake(() => done())
+      store.dispatch(actions.onSubmitSuccess())
+    })
+
+  })
+
   describe('onSubmitFail', () => {
 
-    afterEach(() => store.clearActions())
+    beforeEach(() => store.clearActions())
 
     describe('when authentication fails', () => {
       it('dispatches a login failure action', () => {
@@ -64,6 +68,16 @@ describe('authentication/actions', () => {
           actions.signinFailed(submitError.message)
         ])
       })
+    })
+
+  })
+
+  describe('signinVisited', () => {
+
+    it('returns an action', () => {
+      expect(actions.signinVisited())
+        .to.be.an('object')
+        .with.property('type', types.SIGNIN_VISITED)
     })
 
   })
