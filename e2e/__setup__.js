@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import 'dotenv/config'
 import { before, after } from 'mocha'
 import { grey } from 'chalk'

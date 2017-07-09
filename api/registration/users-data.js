@@ -17,13 +17,13 @@ export default function usersData(knex) {
 
   async function isAvailable({ username }) {
     const { rows: [{ exists }] } = await knex
-      .raw(`select exists(
-        ${knex
+      .raw(`select exists(${
+        knex
           .select('*')
           .from('users')
           .where({ username })
-          .first()}
-      )`)
+          .first()
+      })`)
     return !exists
   }
 
