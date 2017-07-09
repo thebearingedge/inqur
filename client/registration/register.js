@@ -9,7 +9,7 @@ import { onSubmit, onSubmitSuccess, asyncValidate } from './actions'
 import { validate, shouldAsyncValidate } from './helpers'
 
 class Form extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const { asyncValidate } = this.props
     this.asyncValidate = debounce(asyncValidate, 200)
   }

@@ -6,7 +6,6 @@ import chaiEnzyme from 'chai-enzyme'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { initStore } from '../core'
-export * from './shared'
 
 chai.use(chaiEnzyme())
 
@@ -21,18 +20,22 @@ afterEach(() => {
   Object.assign(global, { window, document, navigator })
 })
 
-export const withStore = env => Component => state => {
-  const store = initStore(env)(state)
-  return {
-    store,
-    WithStore: function WithStore(props) {
-      return (
-        <Provider store={ store }>
-          <Component { ...props }/>
-        </Provider>
-      )
-    }
+const withStore = env => Component => initialState => {
+  const store = initStore(env)(initialState)
+  return function WithStore(ownProps) {
+    return (
+      <Provider store={ store }>
+        <Component { ...ownProps }/>
+      </Provider>
+    )
   }
 }
 
-export { mount }
+const nextTick = fn => new Promise(resolve => {
+  fn ? resolve(process.nextTick(fn)) : process.nextTick(resolve)
+})
+
+const { API_URL: baseURL } = process.env
+
+export * from './shared'
+export { mount, withStore, nextTick, baseURL }

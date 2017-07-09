@@ -2,21 +2,19 @@ import { describe, beforeEach, afterEach, it } from 'mocha'
 import React from 'react'
 import moxios from 'moxios'
 import Router from 'next/router'
-import { withStore, expect, mount, stub } from '../test/integration'
+import { withStore, expect, mount, stub, baseURL, nextTick } from '../test/integration'
 import { api } from '../core'
 import { FormError } from '../components'
 import Signin from './signin'
 
 describe('authentication/signin', () => {
 
-  let store
   let wrapper
 
   beforeEach(() => {
     const provide = withStore({ api, Router })
-    const { WithStore, store: _store } = provide(Signin)()
-    store = _store
-    wrapper = mount(<WithStore/>)
+    const Wrapper = provide(Signin)()
+    wrapper = mount(<Wrapper/>)
     moxios.install(api)
     stub(Router, 'push')
   })
@@ -53,10 +51,11 @@ describe('authentication/signin', () => {
   })
 
   it('signs the user in and changes routes', done => {
-    Router.push
+    Router
+      .push
       .withArgs('/')
       .callsFake(() => done())
-    moxios.stubOnce('POST', '/authenticate', {
+    moxios.stubOnce('POST', `${baseURL}/authenticate`, {
       status: 201,
       response: { user: { username: 'foo' }, token: 'token' }
     })
@@ -71,19 +70,10 @@ describe('authentication/signin', () => {
     wrapper.find('[type="submit"]').simulate('submit')
   })
 
-  it('displays authentication failure errors', done => {
-    moxios.stubOnce('POST', '/authenticate', {
+  it('displays authentication failure errors', async () => {
+    const authenticate = moxios.stubOnce('POST', `${baseURL}/authenticate`, {
       status: 401,
       response: { error: 'Invalid Login' }
-    })
-    store.subscribe(() => {
-      const { signin: { signinError } } = store.getState()
-      if (!signinError) return
-      setTimeout(() => {
-        const formError = wrapper.find(FormError).first()
-        expect(formError).to.have.text('Your login information was incorrect.')
-        done()
-      })
     })
     wrapper
       .find('[name="username"]')
@@ -94,6 +84,10 @@ describe('authentication/signin', () => {
       .first()
       .simulate('change', { target: { value: 'foo' } })
     wrapper.find('[type="submit"]').simulate('submit')
+    await authenticate
+    await nextTick()
+    const formError = wrapper.find(FormError).first()
+    expect(formError).to.have.text('Your login information was incorrect.')
   })
 
 })

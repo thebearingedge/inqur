@@ -3,7 +3,7 @@ import React from 'react'
 import moxios from 'moxios'
 import Router from 'next/router'
 import { fakeUser } from '../../api/test/fixtures'
-import { withStore, expect, mount, stub } from '../test/integration'
+import { withStore, expect, mount, stub, baseURL } from '../test/integration'
 import { api } from '../core'
 import Register from './register'
 
@@ -13,8 +13,8 @@ describe('registration/register', () => {
 
   beforeEach(() => {
     const provide = withStore({ api, Router })
-    const { WithStore } = provide(Register)()
-    wrapper = mount(<WithStore/>)
+    const Wrapper = provide(Register)()
+    wrapper = mount(<Wrapper/>)
     moxios.install(api)
     stub(Router, 'push')
   })
@@ -25,14 +25,15 @@ describe('registration/register', () => {
   })
 
   it('checks for the availability of a username', async () => {
+    const validated = moxios.stubOnce('GET', `${baseURL}/registration?username=foo`, {
+      status: 200,
+      response: { username: 'foo', isAvailable: true }
+    })
     wrapper
       .find('[name="username"]')
       .first()
       .simulate('change', { target: { value: 'foo' } })
-    await moxios.stubOnce('GET', '/registration?username=foo', {
-      status: 200,
-      response: { username: 'foo', isAvailable: true }
-    })
+    await validated
   })
 
   it('requires a valid username', () => {
@@ -85,11 +86,11 @@ describe('registration/register', () => {
     Router.push
       .withArgs('/')
       .callsFake(() => done())
-    moxios.stubRequest(`/registration?username=${username}`, {
+    moxios.stubRequest(`${baseURL}/registration?username=${username}`, {
       status: 200,
       response: { username, isAvailable: true }
     })
-    moxios.stubOnce('POST', '/registration', {
+    moxios.stubOnce('POST', `${baseURL}/registration`, {
       status: 201,
       response: { username, email }
     })
