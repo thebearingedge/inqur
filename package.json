@@ -25,8 +25,7 @@
     "watch:db": "onchange -iw 'db/**/*.sql' -- run-s -s db:cycle",
     "watch:client": "node client/",
     "watch": "run-p -s watch:*",
-    "clean": "rimraf client/.next",
-    "pree2e": "NODE_ENV=development run-s -s clean build:client db:cycle",
+    "pree2e": "NODE_ENV=development run-s -s db:cycle build:client",
     "e2e": "mocha -t 0 -r babel-register e2e/*.test.js",
     "cover": "nyc run-s -s test:** e2e",
     "lint": "eslint api/ client/ e2e/",
@@ -111,7 +110,6 @@
     "pg-bump": "1.0.2",
     "react-test-renderer": "15.6.1",
     "redux-mock-store": "1.2.3",
-    "rimraf": "2.6.1",
     "sinon": "2.3.6",
     "sinon-chai": "2.11.0",
     "webpack": "3.1.0"
