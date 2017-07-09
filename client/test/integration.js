@@ -1,13 +1,16 @@
-import { beforeEach, afterEach } from 'mocha'
+import { before, beforeEach, afterEach } from 'mocha'
 import { JSDOM } from 'jsdom'
 import { mount } from 'enzyme'
 import chai from 'chai'
-import chaiEnzyme from 'chai-enzyme'
 import React from 'react'
+import { grey } from 'chalk'
+import chaiEnzyme from 'chai-enzyme'
 import { Provider } from 'react-redux'
 import { initStore } from '../core'
 
 chai.use(chaiEnzyme())
+
+before(() => console.log(grey('\n  Client Integration Tests\n')))
 
 beforeEach(() => {
   const { window } = new JSDOM()

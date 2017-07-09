@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { before, after } from 'mocha'
+import { grey } from 'chalk'
 import Nightmare from 'nightmare'
 import { knex, redis } from '../api/data'
 import createApi from '../api/create-api'
@@ -14,6 +15,7 @@ const browser = new Nightmare({
 })
 
 before(done => {
+  console.log(grey('\n  End-to-End Tests\n'))
   Promise.all([
     createApi(knex, redis),
     createClient({ dev: false })
