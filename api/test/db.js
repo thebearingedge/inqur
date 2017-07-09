@@ -20,4 +20,4 @@ const begin = setup => done => {
 }
 
 export * from './shared'
-export { begin, redis }
+export { begin, knex, redis }

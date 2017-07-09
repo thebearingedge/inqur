@@ -70,6 +70,7 @@
     "redux": "3.7.1",
     "redux-form": "6.8.0",
     "redux-thunk": "2.2.0",
+    "slug": "0.9.1",
     "snake-case": "2.1.0",
     "styled-components": "2.1.1"
   },

@@ -13,3 +13,30 @@ export const fakeUser = () => ({
   password: faker.internet.password(),
   email: faker.internet.email()
 })
+
+export const Option = {
+  optionId: String,
+  answer: String,
+  pollId: String,
+  createdAt: String,
+  updatedAt: String
+}
+
+export const Poll = {
+  pollId: String,
+  question: String,
+  slug: String,
+  isPublished: Boolean,
+  userId: String,
+  createdAt: String,
+  updatedAt: String,
+  options: [Option]
+}
+
+export const fakePoll = userId => ({
+  userId,
+  question: faker.hacker.phrase(),
+  options: Array(2).fill().map(() => ({
+    answer: faker.hacker.phrase()
+  }))
+})
