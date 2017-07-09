@@ -1,10 +1,12 @@
 import 'dotenv/config'
 import { stub, spy } from 'sinon'
+import sinonChai from 'sinon-chai'
 import chai, { expect } from 'chai'
 import { chaiStruct } from 'chai-struct'
-import sinonChai from 'sinon-chai'
 
 chai.use(chaiStruct)
 chai.use(sinonChai)
 
-export { expect, stub, spy }
+const rejected = promise => promise.catch(err => err)
+
+export { expect, stub, spy, rejected }
