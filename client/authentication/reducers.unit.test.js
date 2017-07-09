@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha'
 import { expect, INIT } from '../test/unit'
-import * as types from './action-types'
+import * as types from './types'
 import * as reducers from './reducers'
 
 describe('authentication/reducers', () => {

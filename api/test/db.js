@@ -1,6 +1,9 @@
-import { beforeEach, after } from 'mocha'
+import { before, beforeEach, after } from 'mocha'
+import { grey } from 'chalk'
+import { rejected } from './shared'
 import { knex, redis } from '../data'
-export * from './shared'
+
+before(() => console.log(grey('\n  API Database Tests\n')))
 
 after(() => Promise.all([
   knex.destroy(),
@@ -9,13 +12,12 @@ after(() => Promise.all([
 
 beforeEach(() => redis.flushallAsync())
 
-export const rejected = promise => promise.catch(err => err)
-
-export const begin = setup => done => {
+const begin = setup => done => {
   rejected(knex.transaction(trx => {
     setup(trx)
     done()
   }))
 }
 
-export { redis }
+export * from './shared'
+export { begin, redis }

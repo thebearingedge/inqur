@@ -1,3 +1,6 @@
-export * from './shared'
+import { before } from 'mocha'
+import { grey } from 'chalk'
 
-process.env.NODE_ENV = 'test'
+before(() => console.log(grey('\n  API Unit Tests\n')))
+
+export * from './shared'
