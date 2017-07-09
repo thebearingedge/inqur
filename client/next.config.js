@@ -1,23 +1,16 @@
 require('dotenv/config')
 const { DefinePlugin } = require('webpack')
 
-const {
-  API_SCHEME,
-  API_HOSTNAME,
-  API_PORT
-} = process.env
-
-const API_URL = `${API_SCHEME}://${API_HOSTNAME}:${API_PORT}`
-
 module.exports = {
-  webpack: config => {
+  webpack: (config, { dev }) => {
     config.plugins = config.plugins
       .filter(plugin =>
         process.env.NODE_ENV === 'production' ||
         plugin.constructor.name !== 'UglifyJsPlugin'
       )
       .concat(new DefinePlugin({
-        'process.env.API_URL': JSON.stringify(API_URL)
+        'process.env.API_URL': JSON.stringify(process.env.API_URL),
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }))
     return config
   }

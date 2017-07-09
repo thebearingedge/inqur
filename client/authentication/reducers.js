@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import * as types from './action-types'
+import * as types from './types'
 
 export const signinError = (state = null, action) => {
   switch (action.type) {

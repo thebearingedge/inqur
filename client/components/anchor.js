@@ -22,7 +22,7 @@ const A = styled.a`
 const Anchor = ({ children, href, prefetch, ...props }) =>
   <Link
     href={ href }
-    prefetch={ process.env.NODE_ENV !== 'test' }
+    prefetch={ process.env.NODE_ENV === 'production' }
     { ...props }>
     <A href={ href }>{ children }</A>
   </Link>

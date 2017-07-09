@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { before, after } from 'mocha'
+import { grey } from 'chalk'
 import Nightmare from 'nightmare'
 import { knex, redis } from '../api/data'
 import createApi from '../api/create-api'
@@ -14,6 +15,7 @@ const browser = new Nightmare({
 })
 
 before(done => {
+  console.log(grey('\n  End-to-End Tests\n'))
   Promise.all([
     createApi(knex, redis),
     createClient({ dev: false })
@@ -32,13 +34,7 @@ after(() => {
   })
 })
 
-const {
-  CLIENT_SCHEME,
-  CLIENT_HOSTNAME,
-  CLIENT_PORT
-} = process.env
-
-const baseUrl = `${CLIENT_SCHEME}://${CLIENT_HOSTNAME}:${CLIENT_PORT}`
+const baseUrl = process.env.CLIENT_URL
 
 export {
   fakeUser,
