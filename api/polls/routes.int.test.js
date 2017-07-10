@@ -1,22 +1,16 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
-import { start, request, expect } from '../test/integration'
+import { describe, beforeEach, it } from 'mocha'
+import { inject, request, expect } from '../test/integration'
 import { fakePoll, Poll } from '../test/fixtures'
 
 describe('polls/routes', () => {
 
-  let trx
   let token
-  let server
   let userId
 
-  beforeEach(start((_trx, _server, _userId, _token) => {
-    trx = _trx
+  beforeEach(inject(({ _token, _userId }) => {
     token = _token
-    server = _server
     userId = _userId
   }))
-
-  afterEach(() => server.close(() => trx.rollback()))
 
   describe('POST /polls', () => {
 

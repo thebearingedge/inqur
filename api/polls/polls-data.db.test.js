@@ -1,29 +1,23 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
-import { knex, begin, expect, rejected } from '../test/db'
+import { describe, beforeEach, it } from 'mocha'
+import { inject, expect, rejected } from '../test/db'
 import { Poll, fakePoll, fakeUser } from '../test/fixtures'
 import pollsData from './polls-data'
 
 describe('polls/polls-data', () => {
 
-  let trx
+  let knex
   let polls
   let userId
 
-  beforeEach(done => {
-    begin(_trx => {
-      trx = _trx
-    })(async () => {
-      polls = pollsData(trx)
-      const [{ user_id }] = await trx
-        .insert(fakeUser())
-        .into('users')
-        .returning(['user_id'])
-      userId = user_id
-      done()
-    })
-  })
-
-  afterEach(() => trx.rollback())
+  beforeEach(inject(async ({ _trx, _knex }) => {
+    knex = _knex
+    polls = pollsData(_trx)
+    const [{ user_id }] = await _trx
+      .insert(fakeUser())
+      .into('users')
+      .returning(['user_id'])
+    userId = user_id
+  }))
 
   describe('create', () => {
 

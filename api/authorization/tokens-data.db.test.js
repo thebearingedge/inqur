@@ -1,16 +1,18 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
 import jwt from 'jsonwebtoken'
 import { fakeUser } from '../test/fixtures'
-import { redis, expect, spy } from '../test/db'
+import { inject, expect, spy } from '../test/db'
 import tokensData from './tokens-data'
 
 describe('authorization/tokens-data', () => {
 
+  let redis
   let tokens
 
-  beforeEach(() => {
+  beforeEach(inject(({ _redis }) => {
+    redis = _redis
     tokens = tokensData(redis)
-  })
+  }))
 
   describe('when the token has been issued', () => {
 

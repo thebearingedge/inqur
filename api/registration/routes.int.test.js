@@ -1,18 +1,8 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
-import { start, request, expect } from '../test/integration'
+import { describe, it } from 'mocha'
+import { request, expect } from '../test/integration'
 import { fakeUser, User } from '../test/fixtures'
 
 describe('registration/routes', () => {
-
-  let trx
-  let server
-
-  beforeEach(start((_trx, _server) => {
-    trx = _trx
-    server = _server
-  }))
-
-  afterEach(() => server.close(() => trx.rollback()))
 
   describe('POST /registration', () => {
 

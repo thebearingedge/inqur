@@ -1,5 +1,5 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
-import { expect, begin } from '../test/db'
+import { describe, beforeEach, it } from 'mocha'
+import { inject, expect } from '../test/db'
 import { fakeUser } from '../test/fixtures'
 import usersData from './users-data'
 
@@ -8,12 +8,10 @@ describe('authentication/users-data', () => {
   let trx
   let users
 
-  beforeEach(begin(_trx => {
+  beforeEach(inject(({ _trx }) => {
     trx = _trx
     users = usersData(trx)
   }))
-
-  afterEach(() => trx.rollback())
 
   describe('find', () => {
 

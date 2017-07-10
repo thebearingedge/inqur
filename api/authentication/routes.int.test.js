@@ -1,19 +1,15 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
+import { describe, beforeEach, it } from 'mocha'
 import bcrypt from 'bcrypt'
-import { start, request, expect } from '../test/integration'
+import { inject, request, expect } from '../test/integration'
 import { fakeUser, User } from '../test/fixtures'
 
 describe('authentication/routes', () => {
 
   let trx
-  let server
 
-  beforeEach(start((_trx, _server) => {
+  beforeEach(inject(({ _trx }) => {
     trx = _trx
-    server = _server
   }))
-
-  afterEach(() => server.close(() => trx.rollback()))
 
   describe('POST /authenticate', () => {
 

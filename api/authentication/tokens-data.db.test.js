@@ -1,16 +1,18 @@
 import { describe, beforeEach, afterEach, it } from 'mocha'
-import { redis, expect, spy } from '../test/db'
+import { inject, expect, spy } from '../test/db'
 import jwt from 'jsonwebtoken'
 import { fakeUser } from '../test/fixtures'
 import tokensData from './tokens-data'
 
 describe('authentication/tokens-data', () => {
 
+  let redis
   let tokens
 
-  beforeEach(() => {
+  beforeEach(inject(({ _redis }) => {
+    redis = _redis
     tokens = tokensData(redis)
-  })
+  }))
 
   describe('issue', () => {
 

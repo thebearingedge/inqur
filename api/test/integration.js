@@ -1,4 +1,4 @@
-import { before } from 'mocha'
+import { before, beforeEach, afterEach } from 'mocha'
 import qs from 'qs'
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
@@ -10,22 +10,34 @@ import createApi from '../create-api'
 
 before(() => console.log(grey('\n  API Integration Tests\n')))
 
-const start = setup => done => {
+let _trx
+let _api
+let _token
+let _userId
+
+beforeEach(done => {
   rejected(knex.transaction(trx => {
     (async () => {
-      const [{ user_id: userId }] = await trx
+      const [{ user_id }] = await trx
         .insert(fakeUser())
         .into('users')
-        .returning('*')
-      const token = jwt.sign({ userId }, process.env.TOKEN_SECRET)
-      await redis.setAsync(token, token)
-      const server = createApi(trx, redis)
-        .listen(process.env.API_PORT, () => {
-          setup(trx, server, userId, token)
-          done()
-        })
+        .returning(['user_id'])
+      _trx = trx
+      _userId = user_id
+      _token = jwt.sign({ userId: user_id }, process.env.TOKEN_SECRET)
+      await redis.setAsync(_token, _token)
+      _api = createApi(_trx, redis).listen(process.env.API_PORT, done)
     })()
   }))
+})
+
+afterEach(() => _api.close(() => _trx.rollback()))
+
+const inject = setup => done => {
+  (async () => {
+    await setup({ _trx, _api, _token, _userId })
+    done()
+  })()
 }
 
 const request = axios.create({
@@ -35,4 +47,4 @@ const request = axios.create({
 })
 
 export * from './shared'
-export { start, request }
+export { inject, request }

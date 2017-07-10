@@ -1,6 +1,6 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
+import { describe, beforeEach, it } from 'mocha'
 import bcrypt from 'bcrypt'
-import { begin, expect, rejected } from '../test/db'
+import { inject, expect, rejected } from '../test/db'
 import { User, fakeUser } from '../test/fixtures'
 import usersData from './users-data'
 
@@ -9,12 +9,10 @@ describe('registration/users-data', () => {
   let trx
   let users
 
-  beforeEach(begin(_trx => {
+  beforeEach(inject(({ _trx }) => {
     trx = _trx
     users = usersData(trx)
   }))
-
-  afterEach(() => trx.rollback())
 
   describe('create', () => {
 
