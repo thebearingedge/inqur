@@ -8,7 +8,7 @@ import { onSubmit, onSubmitSuccess, onSubmitFail } from './actions'
 import { validate } from './helpers'
 
 const Form = ({ handleSubmit, submitting, signinError }) =>
-  <form noValidate onSubmit={ handleSubmit }>
+  <form name="signin" noValidate onSubmit={ handleSubmit }>
     <Fields>
       <FormError error={ signinError } submitting={ submitting }/>
       <Field

@@ -17,7 +17,7 @@ class Form extends Component {
     const { asyncValidate } = this
     const { handleSubmit, submitting } = this.props
     return (
-      <form noValidate onSubmit={ handleSubmit }>
+      <form name='register' noValidate onSubmit={ handleSubmit }>
         <Fields>
           <Field
             autoFocus

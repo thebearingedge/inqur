@@ -84,7 +84,7 @@ describe('registration/register', () => {
   it('registers a user and changes routes', done => {
     const { username, email, password } = fakeUser()
     Router.push
-      .withArgs('/')
+      .withArgs('/signin')
       .callsFake(() => done())
     moxios.stubRequest(`${baseURL}/registration?username=${username}`, {
       status: 200,

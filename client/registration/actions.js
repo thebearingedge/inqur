@@ -16,5 +16,5 @@ export const onSubmit = user =>
 
 export const onSubmitSuccess = () =>
   (dispatch, getState, { Router }) => {
-    Router.push('/')
+    Router.push('/signin')
   }
