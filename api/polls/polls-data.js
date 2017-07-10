@@ -22,7 +22,7 @@ export default function pollsData(knex) {
     })
   }
 
-  function findById(poll_id, trx = knex) {
+  function findById(poll_id, trx) {
     return trx
       .select('p.*', knex.raw('json_agg(row_to_json(o)) as options'))
       .from('polls as p')

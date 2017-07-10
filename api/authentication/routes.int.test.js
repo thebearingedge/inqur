@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { start, request, expect } from '../test/integration'
 import { fakeUser, User } from '../test/fixtures'
 
-describe('security/routes', () => {
+describe('authentication/routes', () => {
 
   let trx
   let server
