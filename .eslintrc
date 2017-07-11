@@ -23,5 +23,17 @@
       "asyncArrow": "always"
     }],
     "react/prop-types": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "api/test/*",
+        "api/**/*.db.test.js",
+        "api/**/*-data.js"
+      ],
+      "rules": {
+        "camelcase": 0
+      }
+    }
+  ]
 }
