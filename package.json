@@ -83,7 +83,7 @@
     "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-preset-env": "1.6.0",
     "babel-register": "6.24.1",
-    "chai": "4.0.2",
+    "chai": "4.1.0",
     "chai-enzyme": "0.8.0",
     "chai-struct": "3.0.0",
     "chalk": "2.0.1",
