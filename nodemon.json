@@ -1,6 +1,7 @@
 {
   "watch": [
-    "api/**/*.js"
+    "api/**/*.js",
+    "client/*.js"
   ],
   "ignore": [
     "e2e/",

@@ -23,7 +23,7 @@
     "test": "run-s -s test:**",
     "watch:api": "nodemon -x babel-node api",
     "watch:db": "onchange -iw 'db/**/*.sql' -- run-s -s db:cycle",
-    "watch:client": "node client/",
+    "watch:client": "nodemon client/",
     "watch": "run-p -s watch:*",
     "pree2e": "NODE_ENV=development run-s -s db:cycle build:client",
     "e2e": "mocha -t 0 -r babel-register e2e/*.test.js",
