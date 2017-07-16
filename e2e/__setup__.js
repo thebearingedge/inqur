@@ -2,6 +2,7 @@
 import 'dotenv/config'
 import { before, after } from 'mocha'
 import { grey } from 'chalk'
+import { expect } from 'chai'
 import Nightmare from 'nightmare'
 import { knex, redis } from '../api/data'
 import createApi from '../api/create-api'
@@ -41,5 +42,6 @@ export {
   fakeUser,
   browser,
   baseUrl,
+  expect,
   knex
 }

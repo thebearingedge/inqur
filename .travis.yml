@@ -18,12 +18,9 @@ before_install:
 install:
   - npm install
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
   - psql -U postgres -c 'create database inqur;'
   - greenkeeper-lockfile-update
-  - sleep 3
 script:
-  - npm run travis
+  - xvfb-run -s "-screen 0 1024x768x24" npm run travis
 after_script:
   - greenkeeper-lockfile-upload

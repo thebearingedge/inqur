@@ -13,6 +13,11 @@ module.exports = function createProxy() {
       }
     }))
     .use('/', proxy(process.env.API_URL, {
-      parseReqBody: false
+      parseReqBody: false,
+      proxyReqOptDecorator: (pReq, cReq) => {
+        const { token } = cReq.session
+        if (token) pReq.headers['X-Access-Token'] = token
+        return pReq
+      }
     }))
 }
