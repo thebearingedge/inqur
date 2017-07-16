@@ -31,6 +31,21 @@ describe('session/reducers', () => {
 
       })
 
+      describe(types.SESSION_RESUMED, () => {
+
+        it('returns null', () => {
+          const user = {}
+          const oldState = null
+          const action = {
+            type: types.SESSION_RESUMED,
+            session: user
+          }
+          const newState = session(oldState, action)
+          expect(newState).to.equal(user)
+        })
+
+      })
+
     })
 
   })
