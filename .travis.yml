@@ -9,6 +9,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++
+  chrome: stable
   postgresql: 9.6
 services:
   - postgresql
