@@ -2,6 +2,7 @@ const next = require('next')
 const { join } = require('path')
 const { parse } = require('url')
 const express = require('express')
+const createProxy = require('./create-proxy')
 
 module.exports = function createClient({ dev, dir = __dirname }) {
   const pages = next({ dev, dir })
@@ -9,6 +10,8 @@ module.exports = function createClient({ dev, dir = __dirname }) {
   return pages
     .prepare()
     .then(() => express()
+      .disable('x-powered-by')
+      .use('/api', createProxy())
       .use(express.static(join(__dirname, 'static')))
       .use((req, res) => handler(req, res, parse(req.url)))
     )
