@@ -1,13 +1,13 @@
 import { describe, it } from 'mocha'
 import bcrypt from 'bcrypt'
-import { fakeUser, browser, baseUrl, knex, expect } from './__setup__'
+import { fakeUser, browser, knex, expect } from './__setup__'
 
 describe('/signin', () => {
 
   it('is the auth redirect page', async () => {
     await browser
-      .goto(baseUrl)
-      .wait('form[name="signin"]')
+      .url('/')
+      .waitForExist('form[name="signin"]')
   })
 
   it('lets a registered user sign in', async () => {
@@ -18,14 +18,19 @@ describe('/signin', () => {
       .insert({ username, email, password })
       .into('users')
     await browser
-      .goto(`${baseUrl}/signin`)
-      .wait('form[name="signin"]')
-      .type('[name="username"]', username)
-      .type('[name="password"]', unhashed)
+      .url('/signin')
+      .waitForExist('form[name="signin"]')
+      .setValue('[name="username"]', username)
+      .setValue('[name="password"]', unhashed)
       .click('[type="submit"]')
-      .wait('h1')
-      .evaluate(() => document.querySelector('h1').textContent)
-      .then(text => expect(text).to.equal(`Hello, ${username}!`))
+      .waitForExist('h1')
+    let greeting = await browser.getText('h1')
+    expect(greeting).to.equal(`Hello, ${username}!`)
+    await browser
+      .refresh()
+      .waitForExist('h1')
+    greeting = await browser.getText('h1')
+    expect(greeting).to.equal(`Hello, ${username}!`)
   })
 
 })
