@@ -38,7 +38,7 @@ const nextTick = fn => new Promise(resolve => {
   fn ? resolve(process.nextTick(fn)) : process.nextTick(resolve)
 })
 
-const { API_URL: baseURL } = process.env
+const baseURL = '/api'
 
 export * from './shared'
 export { mount, withStore, nextTick, baseURL }
