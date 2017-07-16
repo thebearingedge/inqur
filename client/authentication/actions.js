@@ -1,4 +1,5 @@
 import * as types from './types'
+import { sessionStarted } from '../session/actions'
 
 export const onSubmit = credentials =>
   async (dispatch, getState, { api }) => {
@@ -6,8 +7,9 @@ export const onSubmit = credentials =>
     return data
   }
 
-export const onSubmitSuccess = () =>
+export const onSubmitSuccess = ({ user }) =>
   (dispatch, getState, { Router }) => {
+    dispatch(sessionStarted(user))
     Router.push('/')
   }
 

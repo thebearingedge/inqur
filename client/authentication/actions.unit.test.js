@@ -4,6 +4,7 @@ import { injectStore, expect, stub } from '../test/unit'
 import { api } from '../core'
 import * as types from './types'
 import * as actions from './actions'
+import { sessionStarted } from '../session/actions'
 
 describe('authentication/actions', () => {
 
@@ -36,12 +37,13 @@ describe('authentication/actions', () => {
 
     afterEach(() => Router.push.restore())
 
-    it('changes routes', done => {
-      Router
-        .push
-        .withArgs('/')
-        .callsFake(() => done())
-      store.dispatch(actions.onSubmitSuccess())
+    it('sets the user session and changes routes', () => {
+      const user = {}
+      store.dispatch(actions.onSubmitSuccess({ user }))
+      expect(Router.push).to.have.been.calledWith('/')
+      expect(store.getActions()).to.deep.equal([
+        sessionStarted(user)
+      ])
     })
 
   })
