@@ -10,7 +10,18 @@ describe('/signin', () => {
       .waitForExist('form[name="signin"]')
   })
 
-  it('lets a registered user sign in', async () => {
+  it('does not sign in unregistered users', async () => {
+    const { username, password } = fakeUser()
+    await browser
+      .url('/signin')
+      .waitForExist('form[name="signin"]')
+      .setValue('[name="username"]', username)
+      .setValue('[name="password"]', password)
+      .click('[type="submit"]')
+      .waitForExist('.form-error')
+  })
+
+  it('signs in registered users', async () => {
     const { username, email, password: unhashed } = fakeUser()
     const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(unhashed, salt)

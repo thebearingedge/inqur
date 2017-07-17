@@ -13,6 +13,6 @@ const P = styled.p`
 `
 
 const FormError = ({ error, ...props }) =>
-  <P hasError={ !!error } { ...props }>{ error }</P>
+  <P className='form-error' hasError={ !!error } { ...props }>{ error }</P>
 
 export default FormError
