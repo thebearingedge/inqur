@@ -1,5 +1,5 @@
 import { describe, it } from 'mocha'
-import { fakeUser, browser, baseUrl } from './__setup__'
+import { fakeUser, browser } from './__setup__'
 
 describe('/register', () => {
 
@@ -7,7 +7,7 @@ describe('/register', () => {
 
   it('accepts new users', async () => {
     await browser
-      .url(`${baseUrl}/register`)
+      .url('/register')
       .waitForExist('form[name="register"]')
       .setValue('[name="username"]', username)
       .setValue('[name="email"]', email)

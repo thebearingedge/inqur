@@ -1,12 +1,12 @@
 import { describe, it } from 'mocha'
 import bcrypt from 'bcrypt'
-import { fakeUser, browser, baseUrl, knex, expect } from './__setup__'
+import { fakeUser, browser, knex, expect } from './__setup__'
 
 describe('/signin', () => {
 
   it('is the auth redirect page', async () => {
     await browser
-      .url(baseUrl)
+      .url('/')
       .waitForExist('form[name="signin"]')
   })
 
@@ -18,13 +18,18 @@ describe('/signin', () => {
       .insert({ username, email, password })
       .into('users')
     await browser
-      .url(`${baseUrl}/signin`)
+      .url('/signin')
       .waitForExist('form[name="signin"]')
       .setValue('[name="username"]', username)
       .setValue('[name="password"]', unhashed)
       .click('[type="submit"]')
       .waitForExist('h1')
-    const greeting = await browser.getText('h1')
+    let greeting = await browser.getText('h1')
+    expect(greeting).to.equal(`Hello, ${username}!`)
+    await browser
+      .refresh()
+      .waitForExist('h1')
+    greeting = await browser.getText('h1')
     expect(greeting).to.equal(`Hello, ${username}!`)
   })
 

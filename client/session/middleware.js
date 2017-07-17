@@ -9,7 +9,6 @@ module.exports = () => session({
   expires: process.env.SESSION_EXPIRY,
   store: new RedisStore({ url: process.env.REDIS_URL }),
   cookie: {
-    domain: process.env.DOMAIN,
     secure: process.env.NODE_ENV === 'production'
   }
 })

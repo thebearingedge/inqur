@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import 'dotenv/config'
 import standalone from 'selenium-standalone'
 import { remote } from 'webdriverio'
@@ -23,11 +22,12 @@ const listening = (app, port) =>
     })
   })
 
-const serve = () => new Promise((resolve, reject) =>
+const serve = () => new Promise((resolve, reject) => {
   standalone.start((err, server) => {
     if (err) return reject(err)
     resolve(server)
-  }))
+  })
+})
 
 before(done => {
   (async () => {
@@ -41,6 +41,7 @@ before(done => {
       client = await listening(_client, process.env.CLIENT_PORT)
       selenium = await serve()
       browser = remote({
+        baseUrl: process.env.CLIENT_URL,
         desiredCapabilities: {
           browserName: 'chrome'
         }
@@ -57,16 +58,13 @@ before(done => {
 after(async () => {
   browser && await browser.end()
   selenium && selenium.kill()
-  api && api.close()
   client && client.close()
+  api && api.close()
 })
-
-const baseUrl = process.env.CLIENT_URL
 
 export {
   fakeUser,
   browser,
-  baseUrl,
   expect,
   knex
 }
