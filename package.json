@@ -92,7 +92,7 @@
     "chai-enzyme": "0.8.0",
     "chai-struct": "3.0.0",
     "chalk": "2.0.1",
-    "codecov": "2.2.0",
+    "codecov": "2.3.0",
     "enzyme": "2.9.1",
     "eslint": "4.3.0",
     "eslint-config-standard": "10.2.1",
