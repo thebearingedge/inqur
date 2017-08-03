@@ -58,7 +58,7 @@
     "es6-error": "4.0.2",
     "express": "4.15.3",
     "express-http-proxy": "1.0.6",
-    "express-session": "1.15.4",
+    "express-session": "1.15.5",
     "joi": "10.6.0",
     "jsonwebtoken": "7.4.1",
     "knex": "0.13.0",
