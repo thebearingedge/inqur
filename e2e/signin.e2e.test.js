@@ -4,12 +4,6 @@ import { fakeUser, browser, knex, expect } from './__setup__'
 
 describe('/signin', () => {
 
-  it('is the auth redirect page', async () => {
-    await browser
-      .url('/')
-      .waitForExist('form[name="signin"]')
-  })
-
   it('does not sign in unregistered users', async () => {
     const { username, password } = fakeUser()
     await browser
@@ -34,14 +28,14 @@ describe('/signin', () => {
       .setValue('[name="username"]', username)
       .setValue('[name="password"]', unhashed)
       .click('[type="submit"]')
-      .waitForExist('h1')
-    let greeting = await browser.getText('h1')
-    expect(greeting).to.equal(`Hello, ${username}!`)
+      .waitForExist('nav')
+    let navText = await browser.getText('nav')
+    expect(navText).to.include(username)
     await browser
       .refresh()
-      .waitForExist('h1')
-    greeting = await browser.getText('h1')
-    expect(greeting).to.equal(`Hello, ${username}!`)
+      .waitForExist('nav')
+    navText = await browser.getText('nav')
+    expect(navText).to.include(username)
   })
 
 })

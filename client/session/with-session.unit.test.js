@@ -1,6 +1,5 @@
-import { describe, beforeEach, afterEach, it } from 'mocha'
-import Router from 'next/router'
-import { injectStore, expect, stub, spy } from '../test/unit'
+import { describe, beforeEach, it } from 'mocha'
+import { injectStore, expect, spy } from '../test/unit'
 import { sessionResumed } from './actions'
 import withSession from './with-session'
 
@@ -11,11 +10,8 @@ describe('session/with-session', () => {
 
   beforeEach(() => {
     getProps = spy()
-    createStore = injectStore({ Router })
-    stub(Router, 'replace')
+    createStore = injectStore({})
   })
-
-  afterEach(() => Router.replace.restore())
 
   describe('on page load', () => {
 
@@ -41,18 +37,6 @@ describe('session/with-session', () => {
 
     })
 
-    describe('when the user does not have an active session', () => {
-
-      it('redirects the user to the signin page', async () => {
-        ctx.res.redirect = spy()
-        const result = await withSession()(ctx)
-        expect(result).to.deep.equal({})
-        expect(ctx.res.redirect).to.have.been.calledWith(302, '/signin')
-        expect(store.getActions()).to.deep.equal([])
-      })
-
-    })
-
   })
 
   describe('on page transition', () => {
@@ -71,28 +55,6 @@ describe('session/with-session', () => {
       it('continues with the current session', async () => {
         await withSession(getProps)(ctx)
         expect(getProps).to.have.been.calledWith(ctx)
-        expect(Router.replace.called).to.equal(false)
-      })
-
-    })
-
-    describe('when the user does not have an active session', () => {
-
-      let ctx
-      let store
-
-      beforeEach(() => {
-        const session = null
-        store = createStore({ session })
-        ctx = { store }
-      })
-
-      it('redirects the user to the signin page', async () => {
-        const result = await withSession()(ctx)
-        expect(result).to.deep.equal({})
-        expect(getProps).not.to.have.been.calledWith(ctx)
-        expect(Router.replace)
-          .to.have.been.calledWith('/signin')
       })
 
     })

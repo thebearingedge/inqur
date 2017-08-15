@@ -1,26 +1,13 @@
 import { sessionResumed } from './actions'
 
-const pass = () => ({})
-
-export default function withSession(getInitialProps = pass) {
+export default function withSession(getInitialProps = () => ({})) {
   return async ctx => {
-    const { req, res, store } = ctx
+    const { req, store } = ctx
     const { getState, dispatch } = store
     const { session } = getState()
-    const signin = `/signin`
-    if (session) return getInitialProps(ctx)
-    if (!req) {
-      dispatch((_, __, { Router }) => Router.replace(signin))
-      return pass()
-    }
+    if (session || !req) return getInitialProps(ctx)
     const { user } = req.session
-    if (user) {
-      dispatch(sessionResumed(user))
-      return getInitialProps(ctx)
-    }
-    else {
-      res.redirect(302, signin)
-      return pass()
-    }
+    if (user) dispatch(sessionResumed(user))
+    return getInitialProps(ctx)
   }
 }
