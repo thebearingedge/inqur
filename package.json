@@ -48,7 +48,7 @@
   "dependencies": {
     "axios": "0.16.2",
     "bcrypt": "1.0.2",
-    "body-parser": "1.17.2",
+    "body-parser": "1.18.2",
     "camelcase": "4.1.0",
     "connect-redis": "3.3.0",
     "cors": "2.8.4",
