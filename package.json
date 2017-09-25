@@ -56,7 +56,7 @@
     "deep-clone": "3.0.2",
     "dotenv": "4.0.0",
     "es6-error": "4.0.2",
-    "express": "4.15.4",
+    "express": "5.0.0-alpha.6",
     "express-http-proxy": "1.0.6",
     "express-session": "1.15.5",
     "joi": "10.6.0",
