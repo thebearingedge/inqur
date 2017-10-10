@@ -73,7 +73,7 @@
     "react-redux": "5.0.6",
     "redis": "2.8.0",
     "redux": "3.7.2",
-    "redux-form": "7.0.3",
+    "redux-form": "7.1.1",
     "redux-thunk": "2.2.0",
     "slug": "0.9.1",
     "snake-case": "2.1.0",
