@@ -105,7 +105,7 @@
     "eslint-plugin-standard": "3.0.1",
     "express-unit": "1.1.0",
     "faker": "4.1.0",
-    "husky": "0.14.3",
+    "husky": "0.15.0-rc.2",
     "jsdom": "11.2.0",
     "mocha": "3.5.0",
     "moxios": "0.4.0",
