@@ -47,7 +47,7 @@
   "homepage": "https://github.com/thebearingedge/inqur#readme",
   "dependencies": {
     "axios": "0.16.2",
-    "bcrypt": "1.0.2",
+    "bcrypt": "2.0.1",
     "body-parser": "1.17.2",
     "camelcase": "4.1.0",
     "connect-redis": "3.3.0",
