@@ -116,7 +116,7 @@
     "react-test-renderer": "15.6.1",
     "redux-mock-store": "1.2.3",
     "selenium-standalone": "6.7.0",
-    "sinon": "3.2.1",
+    "sinon": "5.0.10",
     "sinon-chai": "2.13.0",
     "webdriverio": "4.8.0",
     "webpack": "3.5.5"
