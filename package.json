@@ -91,7 +91,7 @@
     "babel-preset-env": "1.6.0",
     "babel-register": "6.26.0",
     "chai": "4.1.1",
-    "chai-enzyme": "0.8.0",
+    "chai-enzyme": "1.0.0-beta.1",
     "chai-struct": "3.0.0",
     "chalk": "2.1.0",
     "codecov": "2.3.0",
