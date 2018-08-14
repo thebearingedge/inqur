@@ -52,7 +52,7 @@
     "camelcase": "4.1.0",
     "connect-redis": "3.3.0",
     "cors": "2.8.4",
-    "debounce": "1.0.2",
+    "debounce": "1.2.0",
     "deep-clone": "3.0.2",
     "dotenv": "4.0.0",
     "es6-error": "4.0.2",
