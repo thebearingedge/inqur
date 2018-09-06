@@ -113,7 +113,7 @@
     "npm-run-all": "4.0.2",
     "nyc": "11.1.0",
     "onchange": "3.2.1",
-    "react-test-renderer": "15.6.1",
+    "react-test-renderer": "16.5.0",
     "redux-mock-store": "1.2.3",
     "selenium-standalone": "6.7.0",
     "sinon": "3.2.1",
