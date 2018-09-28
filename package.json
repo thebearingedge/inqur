@@ -50,7 +50,7 @@
     "bcrypt": "1.0.2",
     "body-parser": "1.17.2",
     "camelcase": "4.1.0",
-    "connect-redis": "3.3.0",
+    "connect-redis": "3.4.0",
     "cors": "2.8.4",
     "debounce": "1.0.2",
     "deep-clone": "3.0.2",
